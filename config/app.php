@@ -156,6 +156,11 @@ return [
         AnswerMe\Providers\EventServiceProvider::class,
         AnswerMe\Providers\RouteServiceProvider::class,
 
+        Barryvdh\Debugbar\ServiceProvider::class,
+
+        'AdamWathan\EloquentOAuthL5\EloquentOAuthServiceProvider',
+
+
     ],
 
     /*
@@ -201,6 +206,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        
+        'SocialAuth' => 'AdamWathan\EloquentOAuth\Facades\OAuth',
+
 
     ],
 

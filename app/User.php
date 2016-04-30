@@ -6,6 +6,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    public function profile() {
+        return $this->hasOne('\AnswerMe\Profile');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,4 +27,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function usersQuestions() {
+        
+    }
 }

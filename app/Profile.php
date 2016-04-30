@@ -1,0 +1,41 @@
+<?php
+
+namespace AnswerMe;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Profile extends Model
+{
+    public function user() {
+        return $this->belongsTo('AnswerMe\User');
+    }
+
+    public function city() {
+        return $this->belongsTo('AnswerMe\City');
+    }
+
+    public function country() {
+        return $this->belongsTo('AnswerMe\Country');
+    }
+
+    public static function userProfile() {
+
+        # Get the users ID
+        $user_id = \Auth::user()->id;
+
+
+        # Get the users profile information along with their city and country.
+        $profile = \AnswerMe\Profile::with(array('city' => function($query) {
+            $query->addSelect(array('id', 'city'))->get();
+
+        dump($profile);
+        }))->with(array('country' => function($query) {
+            $query->addSelect(array('id', 'country'))->get();
+        }))->with(array('user' => function($query) {
+            $query->addSelect(array('id', 'name', 'email'))->get();
+        }))
+        ->where('user_id', '=', $user_id)->first();
+
+        return $profile;
+    }
+}
