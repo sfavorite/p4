@@ -53,6 +53,12 @@ class CategoryTableSeeder extends Seeder
             'type' => 'Entertainment',
             'font' => 'fa fa-3x fa-music',
         ]);
+        DB::table('categories')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'type' => 'Travel',
+            'font' => 'fa fa-3x fa-suitcase',
+        ]);
 
     }
 }

@@ -26,7 +26,7 @@ class QuestionUserTableSeeder extends Seeder
             'question_id' => $question_id,
             'user_id' => 3,
         ]);
-        
+
         $question_id = \AnswerMe\Question::where('question', '=', 'which is the best tv show')->pluck('id')->first();
         DB::table('question_user')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
@@ -34,6 +34,33 @@ class QuestionUserTableSeeder extends Seeder
             'question_id' => $question_id,
             'user_id' => 2,
         ]);
-
+        $question_id = \AnswerMe\Question::where('question', '=', 'Is London better than Paris')->pluck('id')->first();
+        DB::table('question_user')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'question_id' => $question_id,
+            'user_id' => 2,
+        ]);
+        $question_id = \AnswerMe\Question::where('question', '=', 'Do you eat popcorn at the movies')->pluck('id')->first();
+        DB::table('question_user')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'question_id' => $question_id,
+            'user_id' => 2,
+        ]);
+        $question_id = \AnswerMe\Question::where('question', '=', 'What time do you get up')->pluck('id')->first();
+        DB::table('question_user')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'question_id' => $question_id,
+            'user_id' => 1,
+        ]);
+        $question_id = \AnswerMe\Question::where('question', '=', 'Is Global warming man made')->pluck('id')->first();
+        DB::table('question_user')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'question_id' => $question_id,
+            'user_id' => 1,
+        ]);
     }
 }

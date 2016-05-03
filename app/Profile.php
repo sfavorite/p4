@@ -23,11 +23,7 @@ class Profile extends Model
         return $this->belongsTo('AnswerMe\Country');
     }
 
-    public static function userProfile() {
-
-        # Get the users ID
-        $user_id = \Auth::user()->id;
-
+    public static function userProfile($user_id) {
 
         # Get the users profile information along with their city and country.
         $profile = \AnswerMe\Profile::with(array('city' => function($query) {

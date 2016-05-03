@@ -34,6 +34,7 @@ class QuestionController extends BaseController
     }
 
     function getQuestionOpinions() {
+
         $question_opinions = \AnswerMe\Question::questionOpinions(1);
         dump($question_opinions);
 
@@ -43,6 +44,18 @@ class QuestionController extends BaseController
         $data = array('question' => 'Which is better pizza or cheese burgers', 'category_id' => 1);
         \AnswerMe\Question::newQuestion($data);
 
+    }
+
+    # Get the questions for this category
+    function getQuestions($cat_type) {
+
+        $user = \Auth::user();
+        $category_id = \AnswerMe\Category::where('type', '=', $cat_type)->pluck('id')->first();
+
+        //$user_profile = \AnswerMe\Profile::userProfile();
+        $questions = \AnswerMe\Question::categoryQuestion($user->id, $category_id);
+
+        return view('questions.category')->with('questions', $questions);
     }
 
 

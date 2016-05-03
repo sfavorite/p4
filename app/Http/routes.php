@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/restricted', 'RestrictedController@getRestricted');
     Route::get('/profile', 'ProfileController@getProfile');
-    Route::get('/question', 'QuestionController@getQuestionOpinions');
+    Route::get('/questions/{category}', 'QuestionController@getQuestions');
     Route::get('/all_questions', 'QuestionController@getAllQuestions');
     Route::get('new_question', 'QuestionController@postNewQuestion');
     Route::get('home', 'HomeController@getHome');

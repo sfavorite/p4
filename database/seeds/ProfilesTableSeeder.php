@@ -20,6 +20,7 @@ class ProfilesTableSeeder extends Seeder
             'user_id' => $user_id,
             'city_id' => null,
             'country_id' => '1',
+            'image' => 'https://randomuser.me/api/portraits/women/76.jpg'
         ]);
         $user_id = \AnswerMe\User::where('name', '=', 'Jamal')->pluck('id')->first();
         DB::table('profiles')->insert([
@@ -30,6 +31,7 @@ class ProfilesTableSeeder extends Seeder
             'user_id' => $user_id,
             'city_id' => '3',
             'country_id' => '2',
+            'image' => 'https://randomuser.me/api/portraits/men/76.jpg'
         ]);
     }
 }
