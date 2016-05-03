@@ -18,6 +18,7 @@ class CreateProfilesTable extends Migration
              $table->integer('user_id')->unsigned();
              $table->text('first');
              $table->text('last');
+             $table->integer('ip_address')->unsigned(); // inet_pton inet_ntop
         //     $table->integer('city_id')->unsigned()->nullable;
         //     $table->integer('country_id')->unsigned()->nullable;
 

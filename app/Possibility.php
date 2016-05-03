@@ -13,4 +13,14 @@ class Possibility extends Model
     function question() {
         return $this->belongsToMany('\AnswerMe\Question');
     }
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+/*    protected $fillable = [
+        'instance'
+    ];
+*/
 }

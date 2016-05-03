@@ -51,6 +51,10 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'first' => 'max:255',
+            'last' => 'max:255',
+            'city' =>'alpha',
+            'country' =>'alpha',
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
@@ -65,11 +69,23 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        dump($data);
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        $city = \AnswerMe\City::where('city', '=', $data['city'])->first();
+        dump($city);
+        //$country = \AnswerMe\Country::where('country', '=', $data['country']);
+        $profile = \AnswerMe\Profile::create([
+            'user_id' => $user->id,
+            'first' => $data['first'],
+            'last' => $data['last'],
+            'city_id' => $city->id,
+            'country_id' => 1,
+        ]);
+        return ($user);
     }
 
     public function logout()

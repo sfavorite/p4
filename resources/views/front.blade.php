@@ -23,7 +23,7 @@ such as a page specific stylesheets.
 <div class="container">
     <div>
         <ul class="nav nav-pills nav-justified">
-            <li class=""><a href="{{ url('/profile') }}">Profile</a></li>
+            <li class=""><a href="{{ url('/home') }}">Home</a></li>
             @if (Auth::guest())
                 <li><a href="{{ url('/login') }}">Login</a></li>
                 <li><a href="{{ url('/register') }}">Register</a></li>

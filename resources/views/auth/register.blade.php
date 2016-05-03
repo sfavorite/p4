@@ -17,27 +17,64 @@
     <form method='POST' action='/register'>
         {!! csrf_field() !!}
 
+
+        <div class='form-group'>
+            <label for='name'>First Name</label>
+            <input class="form-control" type='text' name='first' id='first' value='{{ old('first') }}'>
+            <span class="help-block">Optional and kept private</span>
+
+        </div>
+        <div class='form-group'>
+            <label for='name'>Last Name</label>
+            <input class="form-control" type='text' name='last' id='last' value='{{ old('last') }}'>
+            <span class="help-block">Optional and kept private</span>
+
+        </div>
+        <div class='form-group'>
+            <label for='name'>City</label>
+            <input class="form-control" type='text' name='city' id='city' value='{{ old('city') }}'>
+            <span class="help-block">Optional and kept private</span>
+
+        </div>
+        <div class='form-group'>
+            <label for='name'>Country</label>
+            <input class="form-control" type='text' name='city' id='country' value='{{ old('country') }}'>
+            <span class="help-block">Optional and kept private</span>
+
+        </div>
+
         <div class='form-group'>
             <label for='name'>Name</label>
-            <input type='text' name='name' id='name' value='{{ old('name') }}'>
+            <input class="form-control" type='text' name='name' id='name' value='{{ old('name') }}'>
+            <span class="help-block">This is the name displayed to other users</span>
         </div>
 
         <div class='form-group'>
             <label for='email'>Email</label>
-            <input type='text' name='email' id='email' value='{{ old('email') }}'>
+            <input class="form-control" type='text' name='email' id='email' value='{{ old('email') }}'>
+            <span class="help-block">Your email is private and used only to login.</span>
+
         </div>
 
         <div class='form-group'>
             <label for='password'>Password</label>
-            <input type='password' name='password' id='password'>
+            <input class="form-control" type='password' name='password' id='password'>
+
         </div>
 
         <div class='form-group'>
             <label for='password_confirmation'>Confirm Password</label>
-            <input type='password' name='password_confirmation' id='password_confirmation'>
+            <input class="form-control" type='password' name='password_confirmation' id='password_confirmation'>
+
         </div>
 
         <button type='submit' class='btn btn-primary'>Register</button>
+        </form>
+        <form method='link' action="{{ url('/github/authorize') }}" >
+        <div>
+            <p> Or </p>
+            <button class='btn btn-primary'>Login with Github <input<i class="fa fa-github"></i></a>
+        </div>
 
     </form>
 

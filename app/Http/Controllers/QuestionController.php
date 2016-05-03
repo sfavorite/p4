@@ -22,6 +22,7 @@ class QuestionController extends BaseController
                 ->with('categories', $categories);
     }
 
+
     # List's only questions in a given category
     function postCatQuestions() {
         $questions = \AnswerMe\Question::categoryQuestions(3);
@@ -39,12 +40,8 @@ class QuestionController extends BaseController
     }
 
     function postNewQuestion() {
-
-        $question = new \AnswerMe\Question();
-        $question->question = 'Which is better pizza or cheese burgers';
-        $question->category_id = 1;
-        $question->save();
-        echo 'New question: ' . $question->question;
+        $data = array('question' => 'Which is better pizza or cheese burgers', 'category_id' => 1);
+        \AnswerMe\Question::newQuestion($data);
 
     }
 

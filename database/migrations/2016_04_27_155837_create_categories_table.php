@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
 
             $table->string('type');
+            $table->string('font');
         });
 
     }

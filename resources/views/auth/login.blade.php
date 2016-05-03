@@ -34,9 +34,5 @@
         </div>
 
         <button type='submit' class='btn btn-primary'>Login</button>
-        <div>
-            <p> Or </p>
-            <a href="{{ url('/github/authorize') }}">Login with Github</a>
-        </div>
     </form>
 @stop

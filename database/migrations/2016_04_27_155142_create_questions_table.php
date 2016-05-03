@@ -16,7 +16,8 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->string('question', 300);
+            $table->string('question', 200);
+            $table->boolean('open');
             $table->integer('category_id')->unsigned;
         });
 

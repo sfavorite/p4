@@ -10,6 +10,10 @@ class User extends Authenticatable
         return $this->hasOne('\AnswerMe\Profile');
     }
 
+    public function question() {
+        return $this->belongsToMany('\AnswerMe\Question');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +33,6 @@ class User extends Authenticatable
     ];
 
     public static function usersQuestions() {
-        
+
     }
 }

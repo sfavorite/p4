@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+
+    protected $fillable = [
+        'user_id', 'first', 'last', 'city_id', 'country_id'
+    ];
+
     public function user() {
         return $this->belongsTo('AnswerMe\User');
     }
@@ -28,13 +33,12 @@ class Profile extends Model
         $profile = \AnswerMe\Profile::with(array('city' => function($query) {
             $query->addSelect(array('id', 'city'))->get();
 
-        dump($profile);
-        }))->with(array('country' => function($query) {
-            $query->addSelect(array('id', 'country'))->get();
-        }))->with(array('user' => function($query) {
-            $query->addSelect(array('id', 'name', 'email'))->get();
-        }))
-        ->where('user_id', '=', $user_id)->first();
+            }))->with(array('country' => function($query) {
+                $query->addSelect(array('id', 'country'))->get();
+            }))->with(array('user' => function($query) {
+                $query->addSelect(array('id', 'name', 'email'))->get();
+            }))
+                ->where('user_id', '=', $user_id)->first();
 
         return $profile;
     }

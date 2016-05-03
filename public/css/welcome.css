@@ -1,0 +1,115 @@
+body {
+    background: url('../img/road.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: white;
+    font-size: 25px;
+}
+
+.nav {
+    background-color: transparent;
+    background: transparent;
+    border: none;
+    /*box-shadow: 10px 10px 5px #888888;*/
+    color: white;
+
+}
+
+.nav-pills {
+    border-color: #E7E7E7;
+}
+
+/* navbar */
+.navbar-default {
+    //background-color: #F8F8F8;
+    color: white;
+    border-color: #E7E7E7;
+}
+/* title */
+.navbar-default .navbar-brand {
+    color: #777;
+
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: transparent;
+    background: transparent;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+/* caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+
+a {
+    color: white
+}
+
+.answer {
+    text-align: center;
+    display: inline-block;
+    font-size: 0.25%;
+    width: 100%;
+    margin-top: 200px;
+    font-family: 'Lato';
+}
+
+/* responsive text size */
+@media screen and (max-width: 992px) {
+    p, .answer {
+        margin-top:150px;
+        font-size: 1px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    p, .answer {
+        margin-top: 50px;
+        font-size: 1px;
+    }
+}
