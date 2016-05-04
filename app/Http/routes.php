@@ -42,8 +42,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile', 'ProfileController@getProfile');
     Route::get('/questions/{category}', 'QuestionController@getQuestions');
     Route::get('/all_questions', 'QuestionController@getAllQuestions');
-    Route::get('new_question', 'QuestionController@postNewQuestion');
+    Route::get('new_question', 'QuestionController@postQuestion');
     Route::get('home', 'HomeController@getHome');
+    Route::get('/postAnswer', 'QuestionController@postAnswer');
 
 });
 

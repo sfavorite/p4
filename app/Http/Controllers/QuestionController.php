@@ -40,10 +40,15 @@ class QuestionController extends BaseController
 
     }
 
-    function postNewQuestion() {
+    function postQuestion() {
         $data = array('question' => 'Which is better pizza or cheese burgers', 'category_id' => 1);
         \AnswerMe\Question::newQuestion($data);
+        return 'Question posted';
+    }
 
+    function postAnswer() {
+
+        echo 'hello';
     }
 
     # Get the questions for this category

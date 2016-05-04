@@ -31,7 +31,7 @@ class ProfilesTableSeeder extends Seeder
             'user_id' => $user_id,
             'city_id' => '3',
             'country_id' => '2',
-            'image' => 'https://randomuser.me/api/portraits/men/76.jpg'
+            'image' => 'img/generic_profile.png'
         ]);
     }
 }

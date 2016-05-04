@@ -82,7 +82,6 @@ class Question extends Model
                 $query->addSelect(array('users.id', 'name'))->get();
             }))
             ->where('category_id', '=', $category_id)->get();
-
         return $allQuestions;
 
     }
@@ -122,12 +121,18 @@ class Question extends Model
         ->get();
 
         # Get all questions the user has not answered for the given category
-        $questions = \AnswerMe\Question::whereNotIn('id', $all_opinions->toArray())
-        ->where('category_id', '=', $category_id)
-        ->get();
+        $questions = \AnswerMe\Question::with(array('category' => function($query) {
+                $query->addSelect(array('id', 'type'))->get();
+            }))
+            ->whereNotIn('id', $all_opinions->toArray())
+            ->where('category_id', '=', $category_id)
+            ->orderBy('created_at', 'ASC')
+            ->get();
 
         return $questions;
     }
+
+
 
 
     # A particular question and all of the given opinions
