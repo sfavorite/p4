@@ -29,6 +29,7 @@ class Question extends Model
         return \AnswerMe\Question::get()->count();
     }
 
+
     # A collectioin of all the open questions with the users id and name
     public static function allQuestions($user_id) {
 

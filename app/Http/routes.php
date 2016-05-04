@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('new_question', 'QuestionController@postQuestion');
     Route::get('home', 'HomeController@getHome');
     Route::get('/postAnswer', 'QuestionController@postAnswer');
+    Route::get('/question', 'QuestionController@getQuestion');
 
 });
 

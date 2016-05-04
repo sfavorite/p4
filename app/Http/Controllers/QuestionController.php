@@ -4,9 +4,11 @@ namespace AnswerMe\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
+use Illumintate\Database\Eloquent;
 
 class QuestionController extends BaseController
 {
@@ -46,6 +48,22 @@ class QuestionController extends BaseController
         return 'Question posted';
     }
 
+    function getQuestion(Request $request) {
+        $question_id = $request->input('id');
+
+        $question = \AnswerMe\Question::with('possibility')->find($question_id);
+
+        if (count($question)) {
+            return $question->toJson();
+        } else {
+            $response = ['id' => 'Record not found'];
+            return json_encode($response);
+
+        }
+
+
+
+    }
     function postAnswer() {
 
         echo 'hello';

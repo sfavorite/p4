@@ -37,7 +37,7 @@ such as a page specific stylesheets.
                 <tbody>
                     @foreach($questions as $question)
 
-                        <tr onclick="showModal()">
+                        <tr id="{{ $question->id }}" onclick="showModal(this.id)">
                             <td>{{ $question->user[0]->name }}</td><td>{{ $question->question }}</td><td>29393</td>
                         <tr>
                     @endforeach
@@ -65,16 +65,16 @@ such as a page specific stylesheets.
               </div>
               <div class="btn-group pull-right">
                 <button type="submit" class="btn btn-success" onclick="postAnswer()">
-                  Save
+                  Vote
                 </button>
               </div>
 
-              <h3 class="modal-title">New Company</h3>
+              <h3 id="question" class="modal-title">New Company</h3>
             </div>
 
             <div class="modal-body">
               <div class="form-group">
-                <label class="col-xs-3 control-label">Answer question</label>
+                <label  class="col-xs-3 control-label">Question</label>
                 <div class="col-xs-9">
                   <input type="text" name="name" class="form-control" placeholder="Company" value="">
                 </div>
@@ -121,21 +121,54 @@ such as a page specific JavaScript files.
 @section('body')
 <script>
 
-    function showModal() {
+    function showModal(clicked_id) {
+        getQuestion(clicked_id);
         jQuery.noConflict();
         $('#myModal').modal('show');
         return false;
     }
 
-    function postAnswer() {
-        console.log('starting ajax');
+    function getQuestion(clicked_id) {
         try {
             $.ajax({
                 async: false,
                 type: 'GET',
-                url: '/postAnswer/',
+                data: {id: clicked_id},
+                url: 'http://p4.scotfavorite.loc/question/',
                 cache: false,
-                dataType: 'text',
+                dataType: 'json',
+
+                success: function(data) {
+                    if (data['id'] === 'Record not found') {
+                        $('#question').text(data['id']);
+                    } else {
+                        $('#question').text(data['question'])
+                    }
+
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        } catch(e) {
+            console.log('Something is wrong');
+        }
+
+        //$.get('http://p4.scotfavorite.loc/question/2', letMeKnow());
+    }
+
+    function letMeKnow() {
+        alert('here');
+    }
+
+    function postAnswer() {
+        try {
+            $.ajax({
+                async: false,
+                type: 'POST',
+                url: 'http://p4.scotfavorite.loc/postAnswer/',
+                cache: false,
+                dataType: 'json',
                 beforeSend: function() {
                     $('#myModal').modal('hide');
                 },
@@ -144,8 +177,6 @@ such as a page specific JavaScript files.
                 },
                 success: function(data) {
                    event.preventDefault();
-                    console.log(data);
-                    console.log('here');
                     $('#header').text(data);
                 },
                 error: function(data) {
