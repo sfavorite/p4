@@ -36,7 +36,7 @@ class QuestionTableSeeder extends Seeder
         DB::table('Questions')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'question' => 'Is London better than Paris',
+            'question' => 'Which is better London or Paris',
             'category_id' => 8,
             'open' => 1,
         ]);

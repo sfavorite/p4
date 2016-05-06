@@ -5,7 +5,6 @@
         {{-- Yield the title if it exists, otherwise default to 'DBF' --}}
         @yield('title','AnswerMe')
     </title>
-
     <meta charset='utf-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- JQuery & JQueryUI library -->

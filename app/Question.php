@@ -30,18 +30,25 @@ class Question extends Model
     }
 
 
-    # A collectioin of all the open questions with the users id and name
-    public static function allQuestions($user_id) {
+    # A collectioin of all the open questions
+    public static function allQuestionsByOtherUsers($user_id) {
 
         $allQuestions = \AnswerMe\Question::with(array('category' => function($query) {
                 $query->addSelect(array('id', 'type', 'font'))->get();
             }))->with(array('user' => function($query) {
                 $query->addSelect(array('users.id', 'name'))->get();
             }))
+
+            ->whereHas('user', function($query) use ($user_id) {
+                $query->where('users.id', '<>', 1);
+            })
+
             ->get();
 
         return $allQuestions;
     }
+
+
 
     # A collection of questions by category
     public static function questionsByCategoryProfile() {
@@ -70,12 +77,9 @@ class Question extends Model
 
     }
 
-    public static function questionsInACategory($category) {
-
-    }
 
     # A list of all the open questions for a given category (Religion, General, Politics)
-    public static function categoryQuestions($category_id) {
+    public static function questionsInACategory($category_id) {
 
         $allQuestions = \AnswerMe\Question::with(array('category' => function($query) {
                 $query->addSelect(array('id', 'type'))->get();
@@ -88,24 +92,32 @@ class Question extends Model
     }
 
     # Return an array of the number (count) of unanswered questions for a given user
-    public static function unansweredQuestions($user_id = null) {
+    public static function unansweredQuestionsCount($user_id = null) {
         if ($user_id != null) {
             $array_count = array();
+            $opinion_id = array();
             $total = 0;
             $categories = \AnswerMe\Category::get();
 
-            foreach ($categories as $category) {
-                # Get all the questions the user has answered
-                $all_opinions = \AnswerMe\Opinion::addSelect(array('question_id'))
-                    ->where('user_id', '=', $user_id)
-                    ->get();
+            # Get all the opinions of the user
+            $all_opinions = \AnswerMe\Opinion::where('user_id', '=', $user_id)->get();
 
-                # Get all questions the user has not answered
-                $count = \AnswerMe\Question::whereNotIn('id', $all_opinions->toArray())
+            # Convert the opinion id's to an array for the whereNotIn used in the foreach
+            foreach($all_opinions as $opinion) {
+                array_push($opinion_id, $opinion->id);
+            }
+            # For each category we will count the unanswered questions
+            foreach ($categories as $category) {
+                # Get a count of the questions the user has not answered since they are NotIn all_opinions
+                $count = \AnswerMe\Question::whereNotIn('id', [1])//$all_opinions->toArray())
+                    ->whereHas('user', function($query) use ($user_id) {
+                        $query->where('users.id', '<>', $user_id); // don't get questions this user asked.
+                    })
                     ->where('category_id', '=', $category->id)
                     ->get()
                     ->count();
                 $total += $count;
+
                 array_push($array_count, $count);
             }
             array_push($array_count, $total);
@@ -113,22 +125,54 @@ class Question extends Model
         }
     }
 
+    # Get the questions a specific ($users_id) has asked
+    public static function singleUsersQuestions($users_id) {
+        $users_questions = \AnswerMe\Question::whereHas('user', function($query) use ($users_id) {
+            $query->where('users.id', '=', $users_id);
+        })->get();
+
+        return $users_questions;
+    }
+
+
     # Return all unanswered questions for a given user in a given category
     public static function categoryQuestion($user_id = null, $category_id) {
 
-        # Get all the questions the user has answered
+        # This is a simulated sub-query. It is easier to read as two seperate queries
+
+        # First, get all the questions the user has answered
         $all_opinions = \AnswerMe\Opinion::addSelect(array('question_id'))
         ->where('user_id', '=', $user_id)
         ->get();
 
-        # Get all questions the user has not answered for the given category
-        $questions = \AnswerMe\Question::with(array('category' => function($query) {
-                $query->addSelect(array('id', 'type'))->get();
-            }))
-            ->whereNotIn('id', $all_opinions->toArray())
-            ->where('category_id', '=', $category_id)
-            ->orderBy('created_at', 'ASC')
-            ->get();
+        # Second half of the query
+        # If the $category_id is set we only want questions from that category.
+        # Get all questions the user has not answered for the given category\
+
+        # If we have a category_id value return only that value
+        if ($category_id) {
+            $questions = \AnswerMe\Question::with(array('category' => function($query) {
+                    $query->addSelect(array('id', 'type'))->get();
+                }))
+                ->whereHas('user', function($query) use ($user_id) {
+                    $query->where('users.id', '<>', $user_id);
+                })
+                ->whereNotIn('id', $all_opinions->toArray())
+                ->where('category_id', '=', $category_id) # <- Don't do this where clause in the else section
+                ->orderBy('created_at', 'ASC')
+                ->get();
+        } else {
+            $questions = \AnswerMe\Question::with(array('category' => function($query) {
+                    $query->addSelect(array('id', 'type'))->get();
+                }))
+                ->whereHas('user', function($query) use ($user_id) {
+                    $query->where('users.id', '<>', $user_id);
+                })
+                ->whereNotIn('id', $all_opinions->toArray())
+                ->orderBy('created_at', 'ASC')
+                ->get();
+
+        }
 
         return $questions;
     }
@@ -142,7 +186,7 @@ class Question extends Model
         $temp = \AnswerMe\Question::with('possibility')
         ->where('id', '=', $q_id)->get();
 
-/*
+
         $profile = \AnswerMe\Question::with(array('city' => function($query) {
             $query->addSelect(array('id', 'city'))->get();
         }))->with(array('country' => function($query) {
@@ -151,14 +195,14 @@ class Question extends Model
             $query->addSelect(array('id', 'name', 'email'))->get();
         }))
         ->where('user_id', '=', $user_id)->first();
-*/
+
         return $temp;
     }
 
     public static function newQuestion($data) {
 
         $rules = array(
-            'question' => 'required|alpha',
+            'question' => 'required',
             'category_id' => 'required|integer',
         );
 

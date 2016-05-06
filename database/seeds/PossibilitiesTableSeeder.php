@@ -50,8 +50,37 @@ class PossibilitiesTableSeeder extends Seeder
         DB::table('possibilities')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'instance' => 'Fear the Walking Dead',
+            'instance' => 'London',
         ]);
-
+        DB::table('possibilities')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'instance' => 'Paris',
+        ]);
+        DB::table('possibilities')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'instance' => 'Yes',
+        ]);
+        DB::table('possibilities')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'instance' => 'No',
+        ]);
+        DB::table('possibilities')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'instance' => '7 AM',
+        ]);
+        DB::table('possibilities')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'instance' => '8 AM',
+        ]);
+        DB::table('possibilities')->insert([
+            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+            'instance' => 'Noon',
+        ]);
     }
 }

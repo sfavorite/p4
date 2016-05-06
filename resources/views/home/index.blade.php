@@ -24,23 +24,45 @@ such as a page specific stylesheets.
   <div class="panel-heading">
     <h3 class="panel-title">{{ $profile->user->name }}: Your unread questions</h3>
   </div>
-  <div class="panel-body">
-    <div class="row">
-        <div class="col-xs-6 col-sm-4">
-            <a class="bootcards-summary-item" href="/questions/all">
-                <i class="fa fa-3x fa-users aria-hidden=true"></i>
-                <h4>All <span class="label label-info">{{ end($category_count) }}</span></h4>
-            </a>
-        </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <select class="form-control">
+                    <option>Others Questions</option>
+                    <option>My Questions</option>
+                    <
+                </select>
 
-        @foreach($categories as $key => $category)
-            <div class="col-xs-6 col-sm-4">
-                <a class="bootcards-summary-item" href="/questions/{{ $category->type }}">
-                    <i class="{{ $category->font }} aria-hidden=true"></i>
-                    <h4> {{ $category->type }} <span class="label label-info">{{ $category_count[$key] }}</span></h4>
-                </a>
+                    <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-4">
+                                    <a class="bootcards-summary-item" href="/questions/any">
+                                        <i class="fa fa-3x fa-users aria-hidden=true"></i>
+                                        <h4>All <span class="label label-info">{{ end($category_count) }}</span></h4>
+                                    </a>
+                                </div>
+
+                                @foreach($categories as $key => $category)
+                                    <div class="col-xs-6 col-sm-4">
+                                        <a class="bootcards-summary-item" href="/questions/{{ $category->type }}">
+                                            <i class="{{ $category->font }} aria-hidden=true"></i>
+                                            <h4> {{ $category->type }} <span class="label label-info">{{ $category_count[$key] }}</span></h4>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                    </div>
             </div>
-        @endforeach
+
+            <div class="col-md-6">
+                    <div class="panel-body">
+
+
+                    </div>
+            </div>
+
+        </div>
     </div>
   </div>
   <div class="panel-footer">

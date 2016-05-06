@@ -14,36 +14,18 @@ class QuestionController extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
-    # Shows all open questions
-    function getAllQuestions() {
-
-        $questions = \AnswerMe\Question::allQuestions();
-        $categories = \AnswerMe\Category::sortedCategories();
-
-        return view('question.all')->with('questions', $questions)
-                ->with('categories', $categories);
-    }
-
-
     # List's only questions in a given category
     function postCatQuestions() {
-        $questions = \AnswerMe\Question::categoryQuestions(3);
+        $questions = \AnswerMe\Question::questionsInACategory(3);
         $categories = \AnswerMe\Category::sortedCategories();
 
         return view('question.all')->with('questions', $quesitons)
                 ->with('categories', $categories);
-
     }
 
-    function getQuestionOpinions() {
-
-        $question_opinions = \AnswerMe\Question::questionOpinions(1);
-        dump($question_opinions);
-
-    }
 
     function postQuestion() {
-        $data = array('question' => 'Which is better pizza or cheese burgers', 'category_id' => 1);
+        $data = array('question' => 'Which is better pizza or cheese burgers Which is better pizza or cheese burgers Which is better pizza or cheese burgers Which is better pizza or cheese burgersWhich is better pizza or cheese burgers Which is better pizza or cheese burgers', 'category_id' => 1);
         \AnswerMe\Question::newQuestion($data);
         return 'Question posted';
     }
@@ -61,18 +43,13 @@ class QuestionController extends BaseController
 
         }
 
-
-
-    }
-    function postAnswer() {
-
-        echo 'hello';
     }
 
     # Get the questions for this category
     function getQuestions($cat_type) {
 
         $user = \Auth::user();
+
         $category_id = \AnswerMe\Category::where('type', '=', $cat_type)->pluck('id')->first();
 
         //$user_profile = \AnswerMe\Profile::userProfile();
@@ -81,6 +58,26 @@ class QuestionController extends BaseController
         return view('questions.category')->with('questions', $questions);
     }
 
+    function getDelete() {
+        $user = \Auth::user();
+        // Get all questions for this user
+        $users_questions = \AnswerMe\Question::singleUsersQuestions($user->id);
+        dump($users_questions);
+
+        // Get the opinions tied to this questions
+        $opinionsToRemove = \AnswerMe\Opinion::questionOpinionsGiven(1);
+        dump($opinionsToRemove);
+        // Delete those opinions
+        foreach($opinionsToRemove as $opinion) {
+            $opinion->delete();
+        }
+
+        // Get the question and detach the possibilities
+        $question = \AnswerMe\Question::find(1);
+        $question->possibility()->detach();
+        $question->user()->detach();
+        $question->delete();
+    }
 
 
 

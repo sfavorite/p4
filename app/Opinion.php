@@ -28,4 +28,13 @@ class Opinion extends Model
 
     }
 
+    # Get all the opinions given for a specific quesiton
+    public static function questionOpinionsGiven($question_id) {
+        $opinions = \AnswerMe\Opinion::where('question_id', '=', $question_id)->get();
+
+        return $opinions;
+    }
+
+
+
 }

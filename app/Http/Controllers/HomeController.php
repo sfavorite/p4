@@ -17,19 +17,27 @@ class HomeController extends BaseController
         $user = \Auth::user();
         $profile = \AnswerMe\Profile::userProfile($user->id);
         # Get all the unasnwered questions for this user.
-        $questions = \AnswerMe\Question::allQuestions($user->id);
-
+    //    $questions = \AnswerMe\Question::allQuestionsByOtherUsers($user->id);
+    //    dump($questions);
         # List of all categories so we can display them on the users home page.
         $categories = \AnswerMe\Category::get();
 
         # An array of the per category unanswered questons for this user.
-        $category_count = \AnswerMe\Question::unansweredQuestions($user->id);
-
+        $category_count = \AnswerMe\Question::unansweredQuestionsCount($user->id);
+dump($category_count);
         return view('home.index')
             ->with('profile', $profile)
-            ->with('questions', $questions)
+    //        ->with('questions', $questions)
             ->with('categories', $categories)
             ->with('category_count', $category_count);
+    }
+
+    function getChangeProfile() {
+        $user = \Auth::user();
+        $profile = \AnswerMe\Profile::userProfile($user->id);
+        $profile->city_id = 3;
+        $profile->save();
+
     }
 
 }

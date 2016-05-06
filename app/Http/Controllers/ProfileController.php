@@ -14,7 +14,7 @@ class ProfileController extends BaseController
 
     function getProfile() {
 
-        $profile = \AnswerMe\Profile::userProfile();
+        $profile = \AnswerMe\Profile::userProfile(\Auth::id());
 
         if ($profile) {
             echo 'Alias: ' . $profile->user->name . "<br>";
@@ -41,7 +41,7 @@ class ProfileController extends BaseController
             echo "<a href=/logout>Logout</a><br>";
 
             echo 'Questions<br>';
-            $questions = \AnswerMe\Question::allQuestions();
+            $questions = \AnswerMe\Question::allQuestions(\Auth::id());
 
             foreach($questions as $each) {
                 echo $each->user[0]->name . ' asks a ' . $each->category->type . ' question: ' . $each->question . "<br>";
@@ -55,8 +55,4 @@ class ProfileController extends BaseController
 
             $tst = \AnswerMe\Opinion::giveOpinion();
     }
-
-
-
-
 }

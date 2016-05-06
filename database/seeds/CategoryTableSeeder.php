@@ -59,6 +59,5 @@ class CategoryTableSeeder extends Seeder
             'type' => 'Travel',
             'font' => 'fa fa-3x fa-suitcase',
         ]);
-
     }
 }

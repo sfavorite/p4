@@ -38,14 +38,15 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function() {
 
-    Route::get('/restricted', 'RestrictedController@getRestricted');
     Route::get('/profile', 'ProfileController@getProfile');
     Route::get('/questions/{category}', 'QuestionController@getQuestions');
-    Route::get('/all_questions', 'QuestionController@getAllQuestions');
     Route::get('new_question', 'QuestionController@postQuestion');
     Route::get('home', 'HomeController@getHome');
-    Route::get('/postAnswer', 'QuestionController@postAnswer');
+    Route::post('/answer', 'AnswerController@postAnswer');
     Route::get('/question', 'QuestionController@getQuestion');
+    Route::get('/delete', 'QuestionController@getDelete');
+    Route::post('/deleteConfirm', 'QuestionController@postDelete');
+    Route::get('/changeProfile', 'HomeController@getChangeProfile');
 
 });
 

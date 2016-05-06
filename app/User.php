@@ -14,6 +14,7 @@ class User extends Authenticatable
         return $this->belongsToMany('\AnswerMe\Question');
     }
 
+    
     /**
      * The attributes that are mass assignable.
      *

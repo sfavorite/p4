@@ -11,6 +11,8 @@ Use it to add specific things that *this* View needs in the head,
 such as a page specific stylesheets.
 --}}
 @section('head')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <script src='/js/welcome.js'></script>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -24,47 +26,51 @@ such as a page specific stylesheets.
 
 @section('content')
 
+    @if($questions->first())
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 id="header" class="panel-title">Topic {{ $questions[0]->category->type }}</h3>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 id="header" class="panel-title">Topic {{ $questions[0]->category->type }}</h3>
+            </div>
+            <div class="table-responsive">
+                <table id="quesitonTable" class="table table-hover">
+                    <thead>
+                        <tr class="active"><th>Asked by</th><th>Question</th><th>Votes</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach($questions as $question)
+
+                            <tr id="{{ $question->id }}" onclick="showModal(this.id)">
+                                <td>{{ $question->user[0]->name }}</td><td>{{ $question->question }}</td><td>29393</td>
+                            <tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <small>{{ $questions->count() }} unanswered {{ $questions[0]->category->type }} questions</small>
+            </div>
         </div>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr class="active"><th>Asked by</th><th>Question</th><th>Votes</th></tr>
-                </thead>
-                <tbody>
-                    @foreach($questions as $question)
-
-                        <tr id="{{ $question->id }}" onclick="showModal(this.id)">
-                            <td>{{ $question->user[0]->name }}</td><td>{{ $question->question }}</td><td>29393</td>
-                        <tr>
-                    @endforeach
-
-                </tbody>
-            </table>
-        </div>
-        <div class="panel-footer">
-            <small>{{ $questions->count() }} unanswered {{ $questions[0]->category->type }} questions</small>
-        </div>
-    </div>
-
+    @else
+        You have answered all the current questions in this category.
+    @endif
 
     <div id='myModal' class="modal fade in" role="dialog">
       <div class="modal-dialog">
 
-        <div class="modal-content">
+        <div id="voteForm" class="modal-content">
           <form class="form-horizontal">
 
             <div class="modal-header">
-              <div class="btn-group pull-left">
+        {{--      <div class="btn-group pull-left">
                 <button class="btn btn-danger" data-dismiss="modal">
                   Cancel
                 </button>
               </div>
+             --}}
               <div class="btn-group pull-right">
-                <button type="submit" class="btn btn-success" onclick="postAnswer()">
+                <button id="vote" type="submit" action="" class="btn btn-success">
                   Vote
                 </button>
               </div>
@@ -74,33 +80,19 @@ such as a page specific stylesheets.
 
             <div class="modal-body">
               <div class="form-group">
-                <label  class="col-xs-3 control-label">Question</label>
+                <label class="col-xs-3 control-label">Options</label>
                 <div class="col-xs-9">
-                  <input type="text" name="name" class="form-control" placeholder="Company" value="">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-xs-3 control-label">Type</label>
-                <div class="col-xs-9">
-                  <select name="type" class="form-control" value="">
-                    <option value="" selected="">Select a Type...</option>
-                    <option value="Prospect">Prospect</option>
-                    <option value="Customer">Customer</option>
-                    <option value="Inactive">Inactive</option>
+                  <select id="options" name="type" class="form-control" value="">
+                    <option value="" selected="">Give your opinion...</option>
                   </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label class="col-xs-3 control-label">Location</label>
-                <div class="col-xs-9">
-                   <input type="text" name="location" class="form-control" placeholder="Location" value="">
-                </div>
-              </div>
+
             </div>
 
             <div class="modal-footer">
               <small class="pull-left">Built with Bootcards - Form Card</small>
-              <a href="#" class="btn btn-link btn-xs pull-right">View Source</a>
+              <a href="/home" class="btn btn-link btn-xs pull-right">Dash board</a>
             </div>
 
           </form>
@@ -121,17 +113,28 @@ such as a page specific JavaScript files.
 @section('body')
 <script>
 
+    // We will use the question_id when posting an answer so save globally.
+    var question_id;
+
+    // For now a place holder
+    $(document).ready(function () {
+
+    });
+
+    // Show the 'voting' box as a modal
     function showModal(clicked_id) {
+        // We have the 'clicked_id' which is the question_id so save to global
+        question_id = clicked_id;
         getQuestion(clicked_id);
         jQuery.noConflict();
         $('#myModal').modal('show');
         return false;
     }
 
+    // Get the question the user clicked on
     function getQuestion(clicked_id) {
         try {
             $.ajax({
-                async: false,
                 type: 'GET',
                 data: {id: clicked_id},
                 url: 'http://p4.scotfavorite.loc/question/',
@@ -139,10 +142,19 @@ such as a page specific JavaScript files.
                 dataType: 'json',
 
                 success: function(data) {
+                    // If the record wasn't found show the error.
                     if (data['id'] === 'Record not found') {
                         $('#question').text(data['id']);
+                    // No error so show the question and options.
                     } else {
+                        // Remove any options already in the select and put the fisrt one back.
+                        var select = $('#options');
+                        select.empty().append('<option value="">Give your opinion...</option>');
                         $('#question').text(data['question'])
+                        for (i = 0; i < data.possibility.length; ++i) {
+                            var these_options = '<option value="' + data.possibility[i].id + '">' + data.possibility[i].instance + '</option>';
+                            $(these_options).appendTo('#options');
+                        }
                     }
 
                 },
@@ -151,33 +163,29 @@ such as a page specific JavaScript files.
                 }
             });
         } catch(e) {
-            console.log('Something is wrong');
+            console.log('Try ajax get failed');
         }
-
-        //$.get('http://p4.scotfavorite.loc/question/2', letMeKnow());
     }
 
-    function letMeKnow() {
-        alert('here');
-    }
+    // Post the answer the user choose.
+    $('#vote').click(function(event) {
 
-    function postAnswer() {
+        event.preventDefault();
+
+        // Use the global quesiton_id, the option the user choose and our csrf token
+        var usersData = { question_id: question_id,
+                        possibility_id: $('#options option:selected').val(),
+                        '_token': $('meta[name="csrf-token"]').attr('content') };
+
         try {
             $.ajax({
-                async: false,
-                type: 'POST',
-                url: 'http://p4.scotfavorite.loc/postAnswer/',
-                cache: false,
+                type: "POST",
+                url: 'http://p4.scotfavorite.loc/answer',
+                data: usersData,
                 dataType: 'json',
-                beforeSend: function() {
-                    $('#myModal').modal('hide');
-                },
-                complete: function() {
-
-                },
+                cache: false,
                 success: function(data) {
-                   event.preventDefault();
-                    $('#header').text(data);
+                    return false;
                 },
                 error: function(data) {
                     console.log('Error: ', data);
@@ -186,8 +194,8 @@ such as a page specific JavaScript files.
         } catch(e) {
             console.log('Something is wrong');
         }
-        return false;
-    }
+
+    });
 
 
 </script>

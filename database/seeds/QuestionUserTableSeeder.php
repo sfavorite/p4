@@ -34,7 +34,7 @@ class QuestionUserTableSeeder extends Seeder
             'question_id' => $question_id,
             'user_id' => 2,
         ]);
-        $question_id = \AnswerMe\Question::where('question', '=', 'Is London better than Paris')->pluck('id')->first();
+        $question_id = \AnswerMe\Question::where('question', '=', 'Which is better London or Paris')->pluck('id')->first();
         DB::table('question_user')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
