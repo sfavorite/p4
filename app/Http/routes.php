@@ -14,11 +14,14 @@
 # --------------------------------------------------------------------------
 # Laravel Authentication
 # --------------------------------------------------------------------------
+
+Route::get('/signup', 'Auth\AuthController@getSignUp'); # What method (email or github)
+
 Route::get('/login', 'Auth\AuthController@getLogin');
 Route::post('/login', 'Auth\AuthController@postLogin');
 
-Route::get('/register', 'Auth\AuthController@getRegister');
-Route::post('/register', 'Auth\AuthController@postRegister');
+Route::get('/email-signup', 'Auth\AuthController@getRegister');
+Route::post('/email-signup', 'Auth\AuthController@postRegister');
 
 Route::get('/logout', 'Auth\AuthController@logout');
 
@@ -39,14 +42,24 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/profile', 'ProfileController@getProfile');
+
     Route::get('/questions/{category}', 'QuestionController@getQuestions');
+//    Route::get('/posts/{category}', 'QuestionController@getPosts');
+
     Route::get('new_question', 'QuestionController@postQuestion');
-    Route::get('home', 'HomeController@getHome');
-    Route::post('/answer', 'AnswerController@postAnswer');
-    Route::get('/question', 'QuestionController@getQuestion');
+
+
+    Route::get('dashboard', 'DashBoardController@getDashBoard');
+
+
     Route::get('/delete', 'QuestionController@getDelete');
     Route::post('/deleteConfirm', 'QuestionController@postDelete');
-    Route::get('/changeProfile', 'HomeController@getChangeProfile');
+    Route::get('/changeProfile', 'DashBoardController@getChangeProfile');
+
+    # Json Routes
+    Route::post('/answer', 'JsonController@postAnswer');
+    Route::get('/question', 'JsonController@getQuestion');
+    Route::get('/questionCount', 'JsonController@getQuestionCount');
 
 });
 

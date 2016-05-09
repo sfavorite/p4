@@ -11,7 +11,6 @@ Use it to add specific things that *this* View needs in the head,
 such as a page specific stylesheets.
 --}}
 @section('head')
-<script src='/js/welcome.js'></script>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/bootcards/1.1.2/css/bootcards-desktop.css' type='text/css' rel='stylesheet'>
 
 
@@ -22,17 +21,22 @@ such as a page specific stylesheets.
 
 <div class="panel panel-default bootcards-summary">
   <div class="panel-heading">
-    <h3 class="panel-title">{{ $profile->user->name }}: Your unread questions</h3>
+    <h3 class="panel-title">{{ $profile->user->name }}</h3>
   </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
-                <select class="form-control">
-                    <option>Others Questions</option>
-                    <option>My Questions</option>
-                    <
-                </select>
-
+                <form class="form-inline" role="form" action="/dashboard" method='POST'>
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="TypeOfQuestion">Type of questions </label>
+                            <select class="form-control">
+                                <option>Other's Questions</option>
+                                <option>My aQuestions</option>
+                            </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Change</button>
+                </form>
                     <div class="panel-body">
                             <div class="row">
                                 <div class="col-xs-6 col-sm-4">

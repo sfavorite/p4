@@ -12,3 +12,22 @@ footer {
     text-align: right;
     padding: 5px;
 }
+
+
+div.button-spacer {
+    height: 10px;
+}
+
+.spacer {
+    margin-top: 40px;
+}
+
+.btn-github {
+    background: black;
+    color: white;
+}
+
+.btn-github:hover {
+    background-color: grey;
+    color: blue;
+}

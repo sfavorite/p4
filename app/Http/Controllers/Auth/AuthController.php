@@ -24,13 +24,13 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     protected $loginPath = '/login';
-    protected $redirectAfterLogout = '/login';
+    protected $redirectAfterLogout = '/';
     /**
      * Where to redirect users after login / registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new authentication controller instance.
@@ -95,6 +95,15 @@ class AuthController extends Controller
         \Session::flash('message', 'You have been logged out');
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+    }
+
+    public function getSignUp() {
+
+        return view('signup.signup');
+    }
+
+    public function emailSignup() {
+
     }
 
 }

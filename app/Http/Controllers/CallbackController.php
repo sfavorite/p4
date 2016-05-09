@@ -19,18 +19,16 @@ class CallbackController extends BaseController
                 $user->email = $userDetails->email;
                 $user->name = $userDetails->nickname;
                 $user->save();
-                //echo 'Authorize<br>';
-                //echo $user->email;
             });
         } catch (ApplicationRejectedException $e) {
-            echo 'user rejected application';
+            echo 'User rejected application';
         } catch (InvalidAuthorizationCodeException $e) {
             echo 'Authorization was attempted with invalid code.';
         }
 
         $user = \Auth::user();
         if ($user) {
-            return redirect('/profile');
+            return redirect('/dashboard');
         //    return Redirect::intended();
 
         } else {

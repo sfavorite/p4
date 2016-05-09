@@ -25,9 +25,13 @@ such as a page specific stylesheets.
 
 
 @section('content')
+<div class="row">
+    <div class="col-sm-3" style="background-color:lavender;">.col-sm-3</div>
+    <div class="col-sm-6" style="background-color:lavenderblush;">.col-sm-6</div>
+    <div class="col-sm-3" style="background-color:lavender;">.col-sm-3</div>
+</div>
 
     @if($questions->first())
-
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 id="header" class="panel-title">Topic {{ $questions[0]->category->type }}</h3>
@@ -55,6 +59,7 @@ such as a page specific stylesheets.
     @else
         You have answered all the current questions in this category.
     @endif
+
 
     <div id='myModal' class="modal fade in" role="dialog">
       <div class="modal-dialog">
@@ -116,10 +121,6 @@ such as a page specific JavaScript files.
     // We will use the question_id when posting an answer so save globally.
     var question_id;
 
-    // For now a place holder
-    $(document).ready(function () {
-
-    });
 
     // Show the 'voting' box as a modal
     function showModal(clicked_id) {

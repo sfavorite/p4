@@ -30,20 +30,6 @@ class QuestionController extends BaseController
         return 'Question posted';
     }
 
-    function getQuestion(Request $request) {
-        $question_id = $request->input('id');
-
-        $question = \AnswerMe\Question::with('possibility')->find($question_id);
-
-        if (count($question)) {
-            return $question->toJson();
-        } else {
-            $response = ['id' => 'Record not found'];
-            return json_encode($response);
-
-        }
-
-    }
 
     # Get the questions for this category
     function getQuestions($cat_type) {
@@ -56,6 +42,21 @@ class QuestionController extends BaseController
         $questions = \AnswerMe\Question::categoryQuestion($user->id, $category_id);
 
         return view('questions.category')->with('questions', $questions);
+    }
+
+    # Get the questions a user has ASKED by category
+    function getPosts($cat_type) {
+
+        $category_id = \AnswerMe\Category::where('type', '=', $cat_type)->pluck('id')->first();
+
+        # If we have a category type get questions only for that category
+        # otherwise do the 'else' and return all questions asked by this user.
+        if ($category_id) {
+            $posted_questions = questionsUserHasAsked(\Auth::id(), $category_id);
+        } else {
+            $posted_quesitons = \AnswerMe\Question::singleUsersQuestions(\Auth::id());
+        }
+        return $posted_questions;
     }
 
     function getDelete() {

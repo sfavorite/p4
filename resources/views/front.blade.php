@@ -23,10 +23,10 @@ such as a page specific stylesheets.
 <div class="container">
     <div>
         <ul class="nav nav-pills nav-justified">
-            <li class=""><a href="{{ url('/home') }}">Home</a></li>
+            <li class=""><a href="{{ url('/dashboard') }}">Dashboard</a></li>
             @if (Auth::guest())
-                <li><a href="{{ url('/login') }}">Login</a></li>
-                <li><a href="{{ url('/register') }}">Register</a></li>
+                <li><a href="{{ url('/signup') }}">Login</a></li>
+                <li><a href="{{ url('/signup') }}">Register</a></li>
             @else
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
