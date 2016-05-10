@@ -8,13 +8,21 @@ body {
     font-size: 25px;
 }
 
+
+.navbar {
+   background-color: transparent;
+   background: transparent;
+   border: none;
+   /*box-shadow: 10px 10px 5px #888888;*/
+   color: white;
+}
+
 .nav {
     background-color: transparent;
     background: transparent;
     border: none;
     /*box-shadow: 10px 10px 5px #888888;*/
     color: white;
-
 }
 
 .nav-pills {

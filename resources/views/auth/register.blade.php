@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <p class="text-center">Already have an account? <a href='/login'>Login here...</a></p>
+    <p class="text-center">Already have an account? <a href='/signup'>Login here...</a></p>
 
     <h1 class="text-center">Register</h1>
 
@@ -17,12 +17,14 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form method='POST' action='/register'>
+
+
+                <form method='POST' action='/email-signup'>
                     {!! csrf_field() !!}
                     <div class='form-group'>
                         <label for='name'>First Name</label>
                         <input class="form-control" type='text' name='first' id='first' value='{{ old('first') }}'>
-                        <span class="help-block">Optional and kept private</span>
+                        <span class="help-block">Optional</span>
 
                     </div>
                     <div class='form-group'>
@@ -33,18 +35,25 @@
                     <div class='form-group'>
                         <label for='name'>City</label>
                         <input class="form-control" type='text' name='city' id='city' value='{{ old('city') }}'>
-                        <span class="help-block">Optional and kept private</span>
+                        <span class="help-block">Optional</span>
                     </div>
                     <div class='form-group'>
                         <label for='name'>Country</label>
-                        <input class="form-control" type='text' name='city' id='country' value='{{ old('country') }}'>
-                        <span class="help-block">Optional and kept private</span>
+                        <input class="form-control" type='text' name='country' id='country' value='{{ old('country') }}'>
+                        <span class="help-block">Optional</span>
 
                     </div>
+
                     <div class='form-group'>
                         <label for='name'>Name</label>
                         <input class="form-control" type='text' name='name' id='name' value='{{ old('name') }}'>
                         <span class="help-block">This is the name displayed to other users</span>
+                    </div>
+
+                    <div class='form-group'>
+                        <label for='name'>Image</label>
+                        <input class="form-control" type='text' name='image' id='image' value='{{ old('image') }}'>
+                        <span class="help-block">Up load a picture or avatar for your profile</span>
                     </div>
 
                     <div class='form-group'>
@@ -61,16 +70,40 @@
                         <input class="form-control" type='password' name='password_confirmation' id='password_confirmation'>
                     </div>
                     <button type='submit' class='btn btn-primary'>Register</button>
-                </form>
-                    <form method='link' action="{{ url('/github/authorize') }}" >
-                    <div>
-                        <p> Or </p>
-                        <button class='btn btn-primary'>Login with Github <input<i class="fa fa-github"></i></a>
-                    </div>
-
-                </form>
+                </div>
             </div>
-        </div>
+
+        <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
+
+        <script>
+        $(document).ready(function() {
+
+            /*
+            var latitude = "";
+            var longitude = "";
+            if (navigator.geolocation) {
+                   navigator.geolocation.getCurrentPosition(function(position) {
+                       latitude = position.coords.latitude;
+                       longitude = position.coords.longitude;
+
+                        $("#location").html("latitude: " + position.coords.latitude + "<br>longitude: " +  position.coords.longitude);
+                        console.log(position.coords.latitude);
+                    }, showError);
+             }
+             */
+             console.log(geoplugin_request());
+        	var country = geoplugin_countryName();
+            $("#country").val(country);
+        	var zone = geoplugin_region();
+        	var district = geoplugin_city();
+        	$("#city").val(district);
+        });
+
+        function showError() {
+            console.log('Location error');
+        }
 
 
+
+        </script>
 @stop

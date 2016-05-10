@@ -27,7 +27,22 @@ class CallbackController extends BaseController
         }
 
         $user = \Auth::user();
-        if ($user) {
+
+        if($user) {
+            // See if this user has a profile. If not create a private one.
+            // The user can update their information if they want to.
+            $profile = \AnswerMe\Profile::userProfile($user->id);
+            if (!count($profile)) {
+                $profile = new \AnswerMe\Profile();
+                $profile->city_id = 1;
+                $profile->country_id = 1;
+                $profile->first = 'Private';
+                $profile->last = 'Private';
+                $profile->image = '../img/generic_profile.png';
+                $profile->user_id = $user->id;
+                $profile->save();
+            }
+
             return redirect('/dashboard');
         //    return Redirect::intended();
 

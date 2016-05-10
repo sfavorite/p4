@@ -55,7 +55,7 @@ class AuthController extends Controller
             'last' => 'max:255',
             'city' =>'alpha',
             'country' =>'alpha',
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -69,7 +69,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        dump($data);
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -77,13 +77,15 @@ class AuthController extends Controller
         ]);
         $city = \AnswerMe\City::where('city', '=', $data['city'])->first();
         dump($city);
-        //$country = \AnswerMe\Country::where('country', '=', $data['country']);
+        $country = \AnswerMe\Country::where('country', '=', $data['country']);
+
         $profile = \AnswerMe\Profile::create([
             'user_id' => $user->id,
             'first' => $data['first'],
             'last' => $data['last'],
-            'city_id' => $city->id,
-            'country_id' => 1,
+            'city_id' => 1, //$data['city'],
+            'country_id' => 2, //$data['country'],
+
         ]);
         return ($user);
     }

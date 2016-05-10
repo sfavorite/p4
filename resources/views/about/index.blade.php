@@ -19,15 +19,14 @@ such as a page specific stylesheets.
 
 
 @section('content')
-<!-- Give the application name -->
-<div class="container">
 
-    <div class="container">
-            <p class="answer">AnswerMe</p>
-    </div>
+<!-- Modal -->
 
+<div style="background-color: grey;">
+
+        <p>Welcome to AnswerMe where you can ask questions and give your opinion.</p>
 </div>
-<!-- Intro Header -->
+
 
 @stop
 

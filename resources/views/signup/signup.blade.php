@@ -4,7 +4,7 @@
 
     <div class="text-center">
 
-        <h2>Login and get started!<br>
+        <h2>Already a member. Login and get started!<br>
             <div class="button-spacer"></div>
         </h2>
 

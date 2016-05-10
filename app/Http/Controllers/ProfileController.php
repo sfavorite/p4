@@ -12,6 +12,14 @@ class ProfileController extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
+    function getChangeProfile() {
+        $user = \Auth::user();
+        $profile = \AnswerMe\Profile::userProfile($user->id);
+        $profile->city_id = 3;
+        $profile->save();
+
+    }
+    
     function getProfile() {
 
         $profile = \AnswerMe\Profile::userProfile(\Auth::id());

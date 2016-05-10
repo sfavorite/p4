@@ -19,9 +19,6 @@ class CreateProfilesTable extends Migration
              $table->text('first');
              $table->text('last');
              $table->text('image');
-             $table->integer('ip_address')->unsigned(); // inet_pton inet_ntop
-        //     $table->integer('city_id')->unsigned()->nullable;
-        //     $table->integer('country_id')->unsigned()->nullable;
 
              # Make fogeign keys
              $table->foreign('user_id')->references('id')->on('Users');

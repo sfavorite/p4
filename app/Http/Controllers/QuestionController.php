@@ -23,13 +23,33 @@ class QuestionController extends BaseController
                 ->with('categories', $categories);
     }
 
+    function getNewQuestion() {
+        return view('questions.new');
+    }
 
-    function postQuestion() {
+    function postNewQuestion(Request $request) {
+        //sdump($request);
+        $this->validate($request, [
+            'question' => 'required|min:10|max:200|alpha_num',
+            'possibility.*' => 'required|min:1|max:100|alpha_num',
+        ]);
+        /*
+        $this->validate($request, [
+            'question' => 'required|min:10|max:200|alpha_num',
+            'possibility.*' => 'required'|'max:5'|'unique'
+        ]);
+*/
         $data = array('question' => 'Which is better pizza or cheese burgers Which is better pizza or cheese burgers Which is better pizza or cheese burgers Which is better pizza or cheese burgersWhich is better pizza or cheese burgers Which is better pizza or cheese burgers', 'category_id' => 1);
         \AnswerMe\Question::newQuestion($data);
         return 'Question posted';
     }
 
+
+    function getUsersQuestions() {
+        $questions = \AnswerMe\Question::singleUsersQuestions(\Auth::id());
+
+        return view('questions.mine')->with('questions', $questions);
+    }
 
     # Get the questions for this category
     function getQuestions($cat_type) {

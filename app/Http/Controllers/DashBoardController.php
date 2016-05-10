@@ -34,12 +34,6 @@ class DashBoardController extends BaseController
     }
 
 
-    function getChangeProfile() {
-        $user = \Auth::user();
-        $profile = \AnswerMe\Profile::userProfile($user->id);
-        $profile->city_id = 3;
-        $profile->save();
 
-    }
 
 }

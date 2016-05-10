@@ -21,7 +21,7 @@ such as a page specific stylesheets.
 
                 <div class="panel panel-default bootcards-summary">
                   <div class="panel-heading">
-                    <h3 class="panel-title">{{ $profile->user->name }}</h3>
+                    <h3 class="panel-title">Hey {{ $profile->user->name }}</h3>
                   </div>
                     <div class="panel-body">
                         <div class="row">
@@ -51,20 +51,33 @@ such as a page specific stylesheets.
                                     </div>
                             </div>
 
-                            <div class="col-md-6">
-                                    <div class="panel-body">
-                                        <div class="text-center" style="background:rgb(159, 162, 170)">
-                                            <p>Ten most recent questions.</p>
-                                        </div>
-                                    </div>
-                            </div>
+                            <div class="col-sm-6">
 
-                        </div>
-                    </div>
-                  </div>
-                  <div class="panel-footer">
-                    <small>Questions</small>
-                  </div>
+                    			<div>
+
+                    				<div class="panel panel-default bootcards-chart">
+
+                    					<div class="panel-heading">
+                    						<h3 class="panel-title text-center">Ten new questions.</h3>
+                    					</div>
+
+                    					<div>
+
+                    						<!--bar chart-->
+                    						<div class="bootcards-chart-canvas" id="chartClosedSales"></div>
+
+                    						<div class="panel-footer">
+
+                    						</div>
+                    					</div>
+
+                    					<div class="panel-footer">
+                    						<small class="pull-left">Let us know what you think!</small>
+                    					</div>
+                    				</div>
+                                </div>
+                    		</div>
+
 @stop
 
 {{--

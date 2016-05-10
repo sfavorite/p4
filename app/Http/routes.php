@@ -36,7 +36,11 @@ Route::get('/{provider}/callback', 'CallbackController@getCallback');
 # The front page
 # --------------------------------------------------------------------------
 Route::get('/', function () {
-    return view('front');
+    return view('welcome');
+});
+
+Route::get('/about', function() {
+    return view('about.index');
 });
 
 Route::group(['middleware' => 'auth'], function() {
@@ -46,15 +50,17 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/questions/{category}', 'QuestionController@getQuestions');
 //    Route::get('/posts/{category}', 'QuestionController@getPosts');
 
-    Route::get('new_question', 'QuestionController@postQuestion');
+    Route::get('newquestion', 'QuestionController@getNewQuestion');
+    Route::post('newquestion', 'QuestionController@postNewQuestion');
 
+    Route::get('myquestions', 'QuestionController@getUsersQuestions');
 
+    # Users 'home' page
     Route::get('dashboard', 'DashBoardController@getDashBoard');
-
+    //Route::post('dashboard', 'DashBoardController@getDashBoard');
 
     Route::get('/delete', 'QuestionController@getDelete');
     Route::post('/deleteConfirm', 'QuestionController@postDelete');
-    Route::get('/changeProfile', 'DashBoardController@getChangeProfile');
 
     # Json Routes
     Route::post('/answer', 'JsonController@postAnswer');
