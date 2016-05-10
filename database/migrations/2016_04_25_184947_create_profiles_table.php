@@ -12,7 +12,6 @@ class CreateProfilesTable extends Migration
       */
      public function up()
      {
-        echo 'Creating profiles';
          Schema::create('profiles', function (Blueprint $table) {
              $table->increments('id');
              $table->timestamps();
@@ -30,7 +29,7 @@ class CreateProfilesTable extends Migration
            $table->foreign('user_id')->references('id')->on('users');
        });
       */
-       echo 'Priles done.';
+       echo 'Profiles done.';
          //
      }
 

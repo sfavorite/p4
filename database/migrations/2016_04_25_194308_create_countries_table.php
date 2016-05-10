@@ -20,7 +20,7 @@ class CreateCountriesTable extends Migration
             $table->char('abbreviation', 2);
 
         });
-
+        echo 'countries done';
     }
 
     /**
