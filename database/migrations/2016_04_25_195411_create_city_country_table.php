@@ -19,7 +19,7 @@ class CreateCityCountryTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities');
             $table->foreign('country_id')->references('id')->on('countries');
         });
-
+        echo 'citycountry done' . PHP_EOL;
     }
 
 
