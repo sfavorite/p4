@@ -15,7 +15,6 @@ class CreateCityProfileTable extends Migration
         echo 'adding profiles' . PHP_EOL;
         # Make foregin keys
         Schema::table('profiles', function (Blueprint $table) {
-            $table->integer('city_id')->unsigned()->nullable();
             $table->foreign('city_id')->references('id')->on('Cities');
 
         });

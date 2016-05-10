@@ -19,7 +19,7 @@ class CreateProfilesTable extends Migration
              $table->text('first');
              $table->text('last');
              $table->text('image');
-             //$table->integer('city_id')->unsigned()->nullable();
+             $table->integer('city_id')->unsigned()->nullable();
 
 
              # Make fogeign keys
