@@ -24,7 +24,7 @@ class CreateProfilesTable extends Migration
 
              # Make fogeign keys
              $table->foreign('user_id')->references('id')->on('users');
-             $table->foreign('city_id')->references('id')->on('Cities');
+             $table->foreign('city_id')->references('id')->on('cities');
 
 
         });
@@ -43,7 +43,7 @@ class CreateProfilesTable extends Migration
              $table->dropColumn('city_id');
          });
 
-    
+
 
          Schema::drop('profiles');
      }
