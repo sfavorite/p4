@@ -24,6 +24,8 @@ class CreateProfilesTable extends Migration
 
              # Make fogeign keys
              $table->foreign('user_id')->references('id')->on('users');
+             $table->foreign('city_id')->references('id')->on('Cities');
+
 
         });
 
@@ -36,6 +38,13 @@ class CreateProfilesTable extends Migration
       */
      public function down()
      {
+         Schema::table('profiles', function (Blueprint $table) {
+             $table->dropForeign('profiles_city_id_foreign');
+             $table->dropColumn('city_id');
+         });
+
+    
+
          Schema::drop('profiles');
      }
 }
