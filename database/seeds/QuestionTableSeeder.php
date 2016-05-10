@@ -11,7 +11,7 @@ class QuestionTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Questions')->insert([
+        DB::table('questions')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'question' => 'Who will win the election',
@@ -19,42 +19,42 @@ class QuestionTableSeeder extends Seeder
             'open' => 1,
         ]);
 
-        DB::table('Questions')->insert([
+        DB::table('questions')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'question' => 'Who will win the World Series',
             'category_id' => 2,
             'open' => 1,
         ]);
-        DB::table('Questions')->insert([
+        DB::table('questions')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'question' => 'Which is the best TV Show',
             'category_id' => 7,
             'open' => 1,
         ]);
-        DB::table('Questions')->insert([
+        DB::table('questions')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'question' => 'Which is better London or Paris',
             'category_id' => 8,
             'open' => 1,
         ]);
-        DB::table('Questions')->insert([
+        DB::table('questions')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'question' => 'Do you eat popcorn at the movies',
             'category_id' => 7,
             'open' => 1,
         ]);
-        DB::table('Questions')->insert([
+        DB::table('questions')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'question' => 'What time do you get up',
             'category_id' => 1,
             'open' => 1,
         ]);
-        DB::table('Questions')->insert([
+        DB::table('questions')->insert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'question' => 'Is Global warming man made',
