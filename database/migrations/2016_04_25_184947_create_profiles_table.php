@@ -19,6 +19,8 @@ class CreateProfilesTable extends Migration
              $table->text('first');
              $table->text('last');
              $table->text('image');
+             //$table->integer('city_id')->unsigned()->nullable();
+
 
              # Make fogeign keys
              $table->foreign('user_id')->references('id')->on('users');
