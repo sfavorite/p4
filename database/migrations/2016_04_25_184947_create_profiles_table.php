@@ -23,15 +23,9 @@ class CreateProfilesTable extends Migration
              # Make fogeign keys
              $table->foreign('user_id')->references('id')->on('users');
 
-       });
-/*
-       Schema::table('profiles', function($table) {
-           $table->foreign('user_id')->references('id')->on('users');
-       });
-      */
-       echo 'Profiles done.';
-         //
-     }
+        });
+
+    }
 
      /**
       * Reverse the migrations.

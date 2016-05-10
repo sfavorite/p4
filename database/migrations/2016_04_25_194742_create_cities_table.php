@@ -18,7 +18,6 @@ class CreateCitiesTable extends Migration
 
             $table->string('city');
         });
-        echo 'cities done';
     }
 
     /**
