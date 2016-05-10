@@ -22,7 +22,7 @@ class CreateProfilesTable extends Migration
              $table->text('image');
 
              # Make fogeign keys
-             $table->foreign('user_id')->references('id')->on('Users');
+//             $table->foreign('user_id')->references('id')->on('Users');
 
        });
        echo 'Priles done.';
