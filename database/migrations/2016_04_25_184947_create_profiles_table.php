@@ -26,7 +26,7 @@ class CreateProfilesTable extends Migration
 
        });
        Schema::table('profiles', function($table) {
-           $table->foreign('user_id')->references('id')->on('Users');
+           $table->foreign('user_id')->references('id')->on('users');
        });
        echo 'Priles done.';
          //
