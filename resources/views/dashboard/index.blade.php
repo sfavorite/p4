@@ -111,7 +111,7 @@ such as a page specific JavaScript files.
             $.ajax({
                 type: 'GET',
                 //data: {equality: select.value},
-                url: 'http://p4.scotfavorite.loc/questionCount/',
+                url: window.location.protocol + "//" + window.location.host + '/questionCount/',
                 cache: false,
                 dataType: 'json',
                 success: function(data) {

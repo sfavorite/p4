@@ -4,7 +4,7 @@ $('#country').keyup(function () {
     var val = $(this).val(); // Get what the user has typed to use in the search
     $.ajax({
         type: 'GET',
-        url: 'http://p4.scotfavorite.loc/countries',
+        url: window.location.protocol + "//" + window.location.host + '/countries',
         cache: false,
         data: { key: val },
         dataType: 'json',
@@ -30,7 +30,7 @@ $('#city').keyup(function () {
     var val = $(this).val(); // Get what the user has typed to use in the search
     $.ajax({
         type: 'GET',
-        url: 'http://p4.scotfavorite.loc/cities',
+        url: window.location.protocol + "//" + window.location.host + '/cities',
         cache: false,
         data: { key: val },
         dataType: 'json',

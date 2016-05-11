@@ -110,7 +110,7 @@ such as a page specific JavaScript files.
             $.ajax({
                 type: 'GET',
                 data: {id: clicked_id},
-                url: 'http://p4.scotfavorite.loc/question/',
+                url: window.location.protocol + "//" + window.location.host + '/question/',
                 cache: false,
                 dataType: 'json',
 
