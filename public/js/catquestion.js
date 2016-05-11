@@ -19,7 +19,7 @@
             $.ajax({
                 type: 'GET',
                 data: {id: clicked_id},
-                url: 'question/',
+                url: window.location.protocol + "//" + window.location.host + '/question/',
                 cache: false,
                 dataType: 'json',
 
@@ -62,7 +62,7 @@
         try {
             $.ajax({
                 type: "POST",
-                url: '/answer',
+                url: window.location.protocol + "//" + window.location.host + '/answer',
                 data: usersData,
                 dataType: 'json',
                 cache: false,
