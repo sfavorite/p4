@@ -19,7 +19,7 @@
             $.ajax({
                 type: 'GET',
                 data: {id: clicked_id},
-                url: 'http://p4.scotfavorite.loc/question/',
+                url: 'question/',
                 cache: false,
                 dataType: 'json',
 
@@ -62,7 +62,7 @@
         try {
             $.ajax({
                 type: "POST",
-                url: 'http://p4.scotfavorite.loc/answer',
+                url: '/answer',
                 data: usersData,
                 dataType: 'json',
                 cache: false,
