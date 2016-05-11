@@ -26,15 +26,16 @@ class ProfileController extends BaseController
             'last' => 'max:255',
             'city' => 'alpha_spaces',
             'country' => 'alpha_spaces',
-            'name' => 'required|max:255|unique:users',
-            'image[0]' => 'image|max:1000',
-            'email' => 'required|email|max:255|unique:users',
         ]);
 
         $user = \Auth::user();
+        dump($user);
+
         $profile = \AnswerMe\Profile::userProfile($user->id);
+        dump($profile);
         $profile->city_id = 3;
         $profile->save();
+
     }
 
     // Show the Authenticated users profile
