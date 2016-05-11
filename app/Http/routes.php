@@ -43,8 +43,14 @@ Route::get('/about', function() {
     return view('about.index');
 });
 
+# Json Routes used for registration
+Route::get('/cities', 'JsonController@getCities');
+Route::get('/countries', 'JsonController@getCountries');
+
+
 Route::group(['middleware' => 'auth'], function() {
 
+    // Get the authenticated users profile
     Route::get('/profile', 'ProfileController@getProfile');
 
     Route::get('/questions/{category}', 'QuestionController@getQuestions');
@@ -59,8 +65,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('dashboard', 'DashBoardController@getDashBoard');
     //Route::post('dashboard', 'DashBoardController@getDashBoard');
 
-    Route::get('/delete', 'QuestionController@getDelete');
-    Route::post('/deleteConfirm', 'QuestionController@postDelete');
+    Route::post('/delete', 'QuestionController@postDelete');
+    //Route::post('/deleteConfirm', 'QuestionController@postDelete');
+
+    // Get all the users profiles
+    Route::get('usersprofiles', 'ProfileController@getUsersProfiles');
 
     # Json Routes
     Route::post('/answer', 'JsonController@postAnswer');

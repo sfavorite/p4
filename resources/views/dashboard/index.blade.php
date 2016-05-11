@@ -58,17 +58,27 @@ such as a page specific stylesheets.
                     				<div class="panel panel-default bootcards-chart">
 
                     					<div class="panel-heading">
-                    						<h3 class="panel-title text-center">Ten new questions.</h3>
+                    						<h3 class="panel-title text-center">Ten newest questions.</h3>
                     					</div>
 
                     					<div>
+                                            <div class="table-responsive">
+                                                <table id="quesitonTable" class="table table-hover">
+                                                    <thead>
+                                                        <tr class="active"><th>Asked by</th><th>Question</th></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach($ten_newest_questions as $question)
 
-                    						<!--bar chart-->
-                    						<div class="bootcards-chart-canvas" id="chartClosedSales"></div>
+                                                            <tr id="{{ $question->id }}" onclick="showModal(this.id)">
+                                                                <td style="background-color:rgb(56, 49, 131); color: white">{{ $question->user[0]->name }}</td><td>{{ $question->question }}</td>
+                                                            <tr>
+                                                        @endforeach
 
-                    						<div class="panel-footer">
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
-                    						</div>
                     					</div>
 
                     					<div class="panel-footer">

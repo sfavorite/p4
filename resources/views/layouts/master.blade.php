@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- JQuery & JQueryUI library -->
     <script src="http://code.jquery.com/jquery-1.12.3.min.js"   integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="   crossorigin="anonymous"></script>
-    <script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"   integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="   crossorigin="anonymous"></script>
+    <script async src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"   integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="   crossorigin="anonymous"></script>
 
     <!-- Get Bootstrap files from CDN -->
     <!-- Latest compiled and minified CSS -->
@@ -90,14 +90,14 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#"
+                    <a href="/usersprofiles"
                       <i class="fa fa-clipboard"></i>
                       Users
                     </a>
                   </li>
                   <li>
                     <a href="/profile"
-                      <i class="fa fa-gears"></i>
+                      <i class="fa fa-cog"></i>
                       Profile
                     </a>
                   </li>

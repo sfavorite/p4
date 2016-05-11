@@ -19,10 +19,12 @@ class ProfileController extends BaseController
         $profile->save();
 
     }
-    
+
+    // Show the Authenticated users profile
     function getProfile() {
 
         $profile = \AnswerMe\Profile::userProfile(\Auth::id());
+
 
         if ($profile) {
             echo 'Alias: ' . $profile->user->name . "<br>";
@@ -45,22 +47,16 @@ class ProfileController extends BaseController
                 echo 'Country: ' . $profile->country->country . "<br>";
             }
         }
-            echo "<a href=/>Home</a><br>";
-            echo "<a href=/logout>Logout</a><br>";
 
-            echo 'Questions<br>';
-            $questions = \AnswerMe\Question::allQuestions(\Auth::id());
 
-            foreach($questions as $each) {
-                echo $each->user[0]->name . ' asks a ' . $each->category->type . ' question: ' . $each->question . "<br>";
-            };
+            return view('dashboard.profile')->with('profile', $profile);
+    }
 
-            echo "<a href=/new_question>Ask New Question</a>";
+    // Show all users profiles
+    public static function getUsersProfiles() {
 
-            $qp = \AnswerMe\Question::aQuestionAndPossibilities(1);
+        $profiles = \AnswerMe\Profile::allProfiles();
 
-            echo $qp->possibility[0]->instance;
-
-            $tst = \AnswerMe\Opinion::giveOpinion();
+        return view('users.profiles')->with('profiles', $profiles);
     }
 }

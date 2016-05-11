@@ -24,6 +24,41 @@ such as a page specific stylesheets.
 
 @section('content')
 
+    @if(Session::get('message') != null)
+        <div class="flash_message">{{ Session::get('message') }}</div>
+        <div id='deleteModal' class="modal fade in" role="dialog">
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <form role="form" method="POST" action="/delete">
+                        {{ csrf_field() }}
+                        <input id="question_id" type="hidden" name="question_id" vaule="">
+                        <div class="modal-body">
+                            <h3 id="question" class="modal-title"></h3>
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <div class="btn-group">
+                                    <button id="delete" type="submit" class="btn btn-danger btn-block">Confirm Delete</button>
+
+                                    <button id="cancel" data-dismiss="modal" class="btn btn-info btn-block">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+
+
+                </div>
+            </div>
+        </div>
+    @endif
+
     @if($questions->first())
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -32,13 +67,13 @@ such as a page specific stylesheets.
             <div class="table-responsive">
                 <table id="quesitonTable" class="table table-hover">
                     <thead>
-                        <tr class="active"><th>Asked by</th><th>Question</th><th>Votes</th></tr>
+                        <tr class="active"><th>Delete Question</th><th>You asked</th></tr>
                     </thead>
                     <tbody>
                         @foreach($questions as $question)
 
                             <tr id="{{ $question->id }}" onclick="showModal(this.id)">
-                                <td style="background-color:rgb(56, 49, 131); color: white">{{ $question->user[0]->name }}</td><td>{{ $question->question }}</td><td style="background-color:lavender;">29393</td>
+                                <td> <a href="#" class="btn btn-danger">Delete</a></td><td>{{ $question->question }}</td>
                             <tr>
                         @endforeach
 
@@ -54,49 +89,35 @@ such as a page specific stylesheets.
     @endif
 
 
-    <div id='myModal' class="modal fade in" role="dialog">
-      <div class="modal-dialog">
+    <div id='deleteModal' class="modal fade in" role="dialog">
+        <div class="modal-dialog">
 
-        <div id="voteForm" class="modal-content">
-          <form class="form-horizontal">
+            <div class="modal-content">
 
-            <div class="modal-header">
-        {{--      <div class="btn-group pull-left">
-                <button class="btn btn-danger" data-dismiss="modal">
-                  Cancel
-                </button>
-              </div>
-             --}}
-              <div class="btn-group pull-right">
-                <button id="vote" type="submit" action="" class="btn btn-success">
-                  Vote
-                </button>
-              </div>
-
-              <h3 id="question" class="modal-title">New Company</h3>
-            </div>
-
-            <div class="modal-body">
-              <div class="form-group">
-                <label class="col-xs-3 control-label">Options</label>
-                <div class="col-xs-9">
-                  <select id="options" name="type" class="form-control" value="">
-                    <option value="" selected="">Give your opinion...</option>
-                  </select>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-              </div>
+
+                <form role="form" method="POST" action="/delete">
+                    {{ csrf_field() }}
+                    <input id="question_id" type="hidden" name="question_id" vaule="">
+                    <div class="modal-body">
+                        <h3 id="question" class="modal-title"></h3>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div clss="form-group">
+                            <div class="btn-group">
+                                <button id="delete" type="submit" class="btn btn-danger btn-block">Confirm Delete</button>
+
+                                <button id="cancel" data-dismiss="modal" class="btn btn-info btn-block">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
             </div>
-
-            <div class="modal-footer">
-              <small class="pull-left">Built with Bootcards - Form Card</small>
-              <a href="/home" class="btn btn-link btn-xs pull-right">Dash board</a>
-            </div>
-
-          </form>
         </div>
-
-      </div>
     </div>
 
 @stop
@@ -109,88 +130,5 @@ Use it to add specific things that *this* View needs at the end of the body,
 such as a page specific JavaScript files.
 --}}
 @section('body')
-<script>
-
-    // We will use the question_id when posting an answer so save globally.
-    var question_id;
-
-
-    // Show the 'voting' box as a modal
-    function showModal(clicked_id) {
-        // We have the 'clicked_id' which is the question_id so save to global
-        question_id = clicked_id;
-        getQuestion(clicked_id);
-        jQuery.noConflict();
-        $('#myModal').modal('show');
-        return false;
-    }
-
-    // Get the question the user clicked on
-    function getQuestion(clicked_id) {
-        try {
-            $.ajax({
-                type: 'GET',
-                data: {id: clicked_id},
-                url: 'http://p4.scotfavorite.loc/question/',
-                cache: false,
-                dataType: 'json',
-
-                success: function(data) {
-                    // If the record wasn't found show the error.
-                    if (data['id'] === 'Record not found') {
-                        $('#question').text(data['id']);
-                    // No error so show the question and options.
-                    } else {
-                        // Remove any options already in the select and put the fisrt one back.
-                        var select = $('#options');
-                        select.empty().append('<option value="">Give your opinion...</option>');
-                        $('#question').text(data['question'])
-                        for (i = 0; i < data.possibility.length; ++i) {
-                            var these_options = '<option value="' + data.possibility[i].id + '">' + data.possibility[i].instance + '</option>';
-                            $(these_options).appendTo('#options');
-                        }
-                    }
-
-                },
-                error: function(data) {
-                    console.log(data);
-                }
-            });
-        } catch(e) {
-            console.log('Try ajax get failed');
-        }
-    }
-
-    // Post the answer the user choose.
-    $('#vote').click(function(event) {
-
-        event.preventDefault();
-
-        // Use the global quesiton_id, the option the user choose and our csrf token
-        var usersData = { question_id: question_id,
-                        possibility_id: $('#options option:selected').val(),
-                        '_token': $('meta[name="csrf-token"]').attr('content') };
-
-        try {
-            $.ajax({
-                type: "POST",
-                url: 'http://p4.scotfavorite.loc/answer',
-                data: usersData,
-                dataType: 'json',
-                cache: false,
-                success: function(data) {
-                    return false;
-                },
-                error: function(data) {
-                    console.log('Error: ', data);
-                }
-            });
-        } catch(e) {
-            console.log('Something is wrong');
-        }
-
-    });
-
-
-</script>
+    <script src="../js/userquestions.js"></script>
 @stop

@@ -233,6 +233,7 @@ class Question extends Model
             'category_id' => 'required|integer',
         );
 
+        dump($data);
         $validator = \Validator::make($data, $rules);
         echo 'here';
         if ($validator->fails()) {
@@ -242,21 +243,19 @@ class Question extends Model
                 ->withInput($data);
         }
 
-        $user_id = \Auth::user();
+        //$user_id = \Auth::user();
         $question = new \AnswerMe\Question();
         $question->question = $data['question'];
-        $question->category_id = 1; // Need to pass in the category
+        $question->category_id = $data['category_id']; // Need to pass in the category
         $question->save();
-        $question->user()->attach(1); // Need to pass in the user??
+        $question->user()->attach(\Auth::id()); // Need to pass in the user??
 
 
-        $possibilities = array('Pizza', 'cheese burgers');
-        foreach ($possibilities as $instance) {
-            echo 'New ' . $instance;
-            $new_instance = new \AnswerMe\Possibility();
-            $new_instance->instance = $instance;
-            $new_instance->save();
-            $question->possibility()->attach($new_instance->id);
+        foreach ($data['possibility'] as $type) {
+            $new_possibility = new \AnswerMe\Possibility();
+            $new_possibility->instance = $type;
+            $new_possibility->save();
+            $question->possibility()->attach($new_possibility->id);
             //echo $new_instance->id . ' ' . $new_instance->instance;
         }
     }

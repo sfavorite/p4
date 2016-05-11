@@ -24,14 +24,16 @@ class QuestionController extends BaseController
     }
 
     function getNewQuestion() {
-        return view('questions.new');
+        $categories = \AnswerMe\Category::get();
+
+        return view('questions.new')->with('categories', $categories);
     }
 
     function postNewQuestion(Request $request) {
-        //sdump($request);
         $this->validate($request, [
-            'question' => 'required|min:10|max:200|alpha_num',
+            'question' => 'required|min:10|max:200',
             'possibility.*' => 'required|min:1|max:100|alpha_num',
+            'type' => 'required|numeric',
         ]);
         /*
         $this->validate($request, [
@@ -39,9 +41,11 @@ class QuestionController extends BaseController
             'possibility.*' => 'required'|'max:5'|'unique'
         ]);
 */
-        $data = array('question' => 'Which is better pizza or cheese burgers Which is better pizza or cheese burgers Which is better pizza or cheese burgers Which is better pizza or cheese burgersWhich is better pizza or cheese burgers Which is better pizza or cheese burgers', 'category_id' => 1);
+        $data = array('question' => $request->input('question'),
+                'possibility' => $request->input('possibility'),
+                'category_id' => $request->input('type'));
         \AnswerMe\Question::newQuestion($data);
-        return 'Question posted';
+        //return 'Question posted';
     }
 
 
@@ -79,25 +83,28 @@ class QuestionController extends BaseController
         return $posted_questions;
     }
 
-    function getDelete() {
+    function postDelete(Request $request) {
+
         $user = \Auth::user();
         // Get all questions for this user
         $users_questions = \AnswerMe\Question::singleUsersQuestions($user->id);
-        dump($users_questions);
 
         // Get the opinions tied to this questions
-        $opinionsToRemove = \AnswerMe\Opinion::questionOpinionsGiven(1);
-        dump($opinionsToRemove);
+        $opinionsToRemove = \AnswerMe\Opinion::questionOpinionsGiven($request->input('question_id'));
+
         // Delete those opinions
         foreach($opinionsToRemove as $opinion) {
             $opinion->delete();
         }
 
         // Get the question and detach the possibilities
-        $question = \AnswerMe\Question::find(1);
+        $question = \AnswerMe\Question::find($request->input('question_id'));
         $question->possibility()->detach();
         $question->user()->detach();
         $question->delete();
+
+        \Session::flash('message', 'Question Deleted');
+        return redirect('/myquestions');
     }
 
 

@@ -16,6 +16,7 @@ class DashBoardController extends BaseController
 
     function getDashBoard() {
 
+        # Get the user and his profile
         $user = \Auth::user();
         $profile = \AnswerMe\Profile::userProfile($user->id);
 
@@ -27,10 +28,14 @@ class DashBoardController extends BaseController
         # An array of the count of each categories unanswered questons for this user.
         $category_count = \AnswerMe\Question::unansweredQuestionsCount($user->id, $equality);
 
+        # Get the 10 newest questions
+        $ten_newest_questions = \AnswerMe\Question::take(10)->get();
+
         return view('dashboard.index')
             ->with('profile', $profile)
             ->with('categories', $categories)
-            ->with('category_count', $category_count);
+            ->with('category_count', $category_count)
+            ->with('ten_newest_questions', $ten_newest_questions);
     }
 
 

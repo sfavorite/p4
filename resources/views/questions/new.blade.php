@@ -38,20 +38,29 @@ such as a page specific stylesheets.
             <div class="form-group">
                 <label for="question">Post your question:</label>
                 <textarea class="form-control" rows="4" id="question" name="question">{{ old('question') }}</textarea>
-                <div id="possibility">
-                    <label>Possibilities (max is 5)</label>
-                    <div>
-                        <input class="form-control" type="text" name="possibility[]" placeholder="Enter a voting possibility...">
-                    </div>
-                    <label></label>
-                    <div>
-                        <input class="form-control" type="text" name="possibility[]" placeholder="Enter a voting possibility...">
-                    </div>
-                </div>
             </div>
+            <div class="form-group">
+                    <select id="options" name="type" class="form-control" value="">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->type }}</option>
+                        @endforeach
+                    </select>
+            </div>
+            <div class="form-group">
+                    <div id="possibility">
+                        <label>Possibilities (max is 5)</label>
+                        <div>
+                            <input class="form-control" type="text" name="possibility[]" placeholder="Enter a voting possibility...">
+                        </div>
+                        <label></label>
+                        <div>
+                            <input class="form-control" type="text" name="possibility[]" placeholder="Enter a voting possibility...">
+                        </div>
+                    </div>
+            </div>
+
             <a id="add" class="btn btn-info" href="#">Add possibility</a>
             <button id="postQuestion" class="btn btn-primary" type="submit">Submit Question</button>
-
     </form>
 
 </div>
@@ -75,13 +84,8 @@ such as a page specific JavaScript files.
             // How many textboxes have been added.
             var n = $('.text').length + 1;
 
-            // If this is the first added input put a <br>
-            if (n == 1) {
-                $('#possibility').append('<br>');
-
-            }
             // Add a new input
-            $('#possibility').append('<div><input class="form-control" type="text" name="possibility[]" placeholder="Enter a voting possibility..."><button class="delete btn btn-danger">Delete</button></div><br>');
+            $('#possibility').append('<label></label><div><input class="form-control" type="text" name="possibility[]" placeholder="Enter a voting possibility..."><br><button class="delete btn btn-danger">Delete</button></div>');
 
             // How many boxes do we have...5 should be the max.
             // If so disable the Add possibility button
@@ -92,9 +96,6 @@ such as a page specific JavaScript files.
 
         $('body').on('click', '.delete', function(event) {
             // Remove the selected input box
-            $(this.parent).prev('br').remove();
-            $(this.parent).next('br').remove();
-
             $(this).parent('div').remove();
 
             // Make sure the Add possibility button is not disabled.

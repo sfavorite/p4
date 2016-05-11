@@ -43,14 +43,8 @@ class JsonController extends BaseController
         $opinion->question_id = $question_id;
         $opinion->save();
 
-    /*    if (count($question)) {
-            return $question->toJson();
-        } else {
-            $response = ['id' => 'Record not found' . $question_id];
-            return json_encode($response);
+        return json_encode(['Your vote was counted!']);
 
-        }
-        */
     }
 
     function getQuestionCount(Request $request) {
@@ -58,20 +52,28 @@ class JsonController extends BaseController
         $user = \Auth::user();
         $equality = '<>';
 
-/*
-        # If the user selected 'My Questions' we will look for questions
-        # equal = to their id otherwise questions not equal <> to their id.
-        if ($request->input('equality') === 'mine') {
-            $equality = '=';
-        } elseif ($request->input('equality') === 'others') {
-            $equality = '<>';
-        } else {
-            return 'Error';
-        }
-*/
         # An array of the count of each categories unanswered questons for this user.
         $category_count = \AnswerMe\Question::unansweredQuestionsCount($user->id, $equality);
         return json_encode($category_count);
+    }
+
+    // Return list of all cities in a given country
+    function getCities(Request $request) {
+
+        $this->validate($request, [
+            'key' => 'alpha',
+        ]);
+        //$cities = \Answerme\City::where('user_id', '=', $user_id)->addSelect(array('id', 'city'))->get();
+        $cities = \AnswerMe\City::where('city', 'LIKE', $request->input('key') . '%')->addSelect(array('city'))->get();
+
+        return $cities;
+    }
+
+    function getCountries() {
+
+        $countries = \AnswerMe\Country::addSelect(array('country'))->get();
+
+        return $countries;
     }
 
 }

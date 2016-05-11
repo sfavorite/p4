@@ -38,4 +38,21 @@ class Profile extends Model
 
         return $profile;
     }
+
+    public static function allProfiles() {
+        # Get all the users and profile information along with city and country.
+        $profile = \AnswerMe\Profile::with(array('city' => function($query) {
+            $query->addSelect(array('id', 'city'))->get();
+
+            }))->with(array('country' => function($query) {
+                $query->addSelect(array('id', 'country'))->get();
+            }))->with(array('user' => function($query) {
+                $query->addSelect(array('id', 'name', 'email'))->get();
+            }))
+            ->get();
+
+        return $profile;
+    }
+
+
 }

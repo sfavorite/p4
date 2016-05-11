@@ -20,7 +20,8 @@ such as a page specific stylesheets.
 
 @section('content')
 <!-- Give the application name -->
-<div class="container">
+
+
     <div>
         <ul class="nav nav-pills nav-justified">
             <li class=""><a href="{{ url('/profile') }}">Profile</a></li>

@@ -2,9 +2,8 @@
 
 @section('content')
 
-    <p class="text-center">Already have an account? <a href='/signup'>Login here...</a></p>
 
-    <h1 class="text-center">Register</h1>
+    <h1 class="text-center">Profile</h1>
 
     @if(count($errors) > 0)
         <ul class='errors'>
@@ -23,32 +22,32 @@
                     {!! csrf_field() !!}
                     <div class='form-group'>
                         <label for='name'>First Name</label>
-                        <input class="form-control" type='text' name='first' id='first' value='{{ old('first') }}'>
+                        <input class="form-control" type='text' name='first' id='first' value='{{ $profile->first }}'>
                         <span class="help-block">Optional</span>
 
                     </div>
                     <div class='form-group'>
                         <label for='name'>Last Name</label>
-                        <input class="form-control" type='text' name='last' id='last' value='{{ old('last') }}'>
+                        <input class="form-control" type='text' name='last' id='last' value='{{ $profile->last }}'>
                         <span class="help-block">Optional</span>
                     </div>
 
                     <div class='form-group ui-widget'>
                         <label for='name'>Country</label>
-                        <input class="form-control" type='text' autocorrect="off" name='country' id='country' value='{{ old('country') }}'>
+                        <input class="form-control" type='text' autocorrect="off" name='country' id='country' value='{{ $profile->country->country }}'>
                         <span class="help-block">Optional</span>
 
                     </div>
 
                     <div class='form-group ui-widget'>
                         <label for='name'>City</label>
-                        <input class="form-control" type='text' autocorrect="off" name='city' id='city' value='{{ old('city') }}'>
+                        <input class="form-control" type='text' autocorrect="off" name='city' id='city' value='{{ $profile->city->city }}'>
                         <span class="help-block">Optional</span>
                     </div>
 
                     <div class='form-group'>
                         <label for='name'>Name</label>
-                        <input class="form-control" type='text' name='name' id='name' value='{{ old('name') }}'>
+                        <input class="form-control" type='text' name='name' id='name' value='{{ $profile->user->name }}'>
                         <span class="help-block">This is the name displayed to other users</span>
                     </div>
 
@@ -60,18 +59,10 @@
 
                     <div class='form-group'>
                         <label for='email'>Email</label>
-                        <input class="form-control" type='text' name='email' id='email' value='{{ old('email') }}'>
+                        <input class="form-control" type='text' name='email' id='email' value='{{ $profile->user->email }}'>
                         <span class="help-block">Your email is private and used only to login.</span>
                     </div>
-                    <div class='form-group'>
-                        <label for='password'>Password</label>
-                        <input class="form-control" type='password' name='password' id='password'>
-                    </div>
-                    <div class='form-group'>
-                        <label for='password_confirmation'>Confirm Password</label>
-                        <input class="form-control" type='password' name='password_confirmation' id='password_confirmation'>
-                    </div>
-                    <button type='submit' class='btn btn-primary'>Register</button>
+                    <button type='submit' class='btn btn-primary'>Update Profile</button>
                 </div>
             </div>
 

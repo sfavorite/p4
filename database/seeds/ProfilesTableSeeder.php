@@ -18,7 +18,7 @@ class ProfilesTableSeeder extends Seeder
             'first' => 'Jill',
             'last' => 'Ryhme',
             'user_id' => $user_id,
-            'city_id' => null,
+            'city_id' => 1,
             'country_id' => '1',
             'image' => 'https://randomuser.me/api/portraits/women/76.jpg'
         ]);
