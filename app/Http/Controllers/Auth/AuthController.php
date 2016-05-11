@@ -48,13 +48,20 @@ class AuthController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+
     protected function validator(array $data)
     {
+        // Extend the Validator so we can validate letters and spaces
+        Validator::extend('alpha_spaces', function($field, $value, $parameters) {
+            return preg_match('/^[\pL\s]+$/u', $value);
+        });
+
         return Validator::make($data, [
             'first' => 'max:255',
             'last' => 'max:255',
-            'city' =>'alpha',
-            'country' =>'alpha',
+            'city' => 'alpha_spaces',
+            'country' => 'alpha_spaces',
             'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
@@ -76,16 +83,16 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
         $city = \AnswerMe\City::where('city', '=', $data['city'])->first();
-        dump($city);
+
         $country = \AnswerMe\Country::where('country', '=', $data['country']);
 
         $profile = \AnswerMe\Profile::create([
             'user_id' => $user->id,
+            'image' => 'img/generic_profile.png',
             'first' => $data['first'],
             'last' => $data['last'],
             'city_id' => 1, //$data['city'],
-            'country_id' => 2, //$data['country'],
-
+            'country_id' => 2
         ]);
         return ($user);
     }

@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     // Get the authenticated users profile
     Route::get('/profile', 'ProfileController@getProfile');
+    Route::post('/profile', 'ProfileController@postChangeProfile');
 
     Route::get('/questions/{category}', 'QuestionController@getQuestions');
 //    Route::get('/posts/{category}', 'QuestionController@getPosts');

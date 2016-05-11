@@ -92,9 +92,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
+        'possibility.*' => [
+            'required' => 'At least two possibilities must be submitted.',
+            'alpha_num' => 'Please you letters and numbers',
+        ]
+
     ],
 
     /*

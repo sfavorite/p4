@@ -18,7 +18,7 @@
             <div class="col-md-6">
 
 
-                <form method='POST' action='/email-signup'>
+                <form method='POST' action='/profile'>
                     {!! csrf_field() !!}
                     <div class='form-group'>
                         <label for='name'>Name</label>
@@ -50,10 +50,11 @@
                         <input class="form-control" type='text' autocorrect="off" name='city' id='city' value='{{ $profile->city->city }}'>
                         <span class="help-block">Optional</span>
                     </div>
+                    <div class='form-group'>
                             <h4>Image</h4>
-                            <input class="btn-primary" type='file' title='Add an image' name='image' id='image'>
+                            <input class="btn-primary" type='file' size='1000' title='Add an image' name='image' id='image'>
                             <span class="help-block">Up load a picture or avatar for your profile (jpg, png)</span>
-
+                    </div>
                     <div class='form-group'>
                         <label for='email'>Email</label>
                         <input class="form-control" type='text' name='email' id='email' value='{{ $profile->user->email }}'>
@@ -69,36 +70,6 @@
         <script src="../js/bootstrap.file-input.js"></script>
         <script src="../js/citycountry.js" type="text/javascript"></script>
 
-        <script>
-
-        var availableCountries = [
-        ];
-
-        var availableCities = [
-        ];
-
-        $(function() {
-          $( "#city" ).autocomplete({
-            source: availableCities
-          });
-        });
-
-        $(function() {
-          $( "#country" ).autocomplete({
-            source: availableCountries
-          });
-        });
-
-        $(document).ready(function() {
-            var country = geoplugin_countryName();
-            $("#country").val(country);
-            var zone = geoplugin_region();
-            var district = geoplugin_city();
-            $("#city").val(district);
-
-            $('#image').bootstrapFileInput();
-
-        });
-        </script>
+        <script src="../js/profile.js" type="text/javascript"></script>
 
 @stop
