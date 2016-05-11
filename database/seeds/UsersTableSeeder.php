@@ -29,13 +29,5 @@ class UsersTableSeeder extends Seeder
             'email' => 'jamal@harvard.edu',
             'password' => bcrypt('helloworld'),
         ]);
-        DB::table('users')->insert([
-
-            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-
-            'name' => 'Scot',
-            'email' => 'scot@harvard.edu',
-            'password' => bcrypt('laravel'),
-        ]);    }
+    }
 }

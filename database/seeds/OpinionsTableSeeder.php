@@ -32,7 +32,7 @@ class OpinionsTableSeeder extends Seeder
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'possibility_id' => 2,
-            'user_id' => 3,
+            'user_id' => 2,
             'question_id' => 3,
         ]);
 

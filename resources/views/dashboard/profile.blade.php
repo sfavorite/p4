@@ -21,6 +21,12 @@
                 <form method='POST' action='/email-signup'>
                     {!! csrf_field() !!}
                     <div class='form-group'>
+                        <label for='name'>Name</label>
+                        <input class="form-control" type='text' name='name' id='name' value='{{ $profile->user->name }}'>
+                        <span class="help-block">This is the name displayed to other users</span>
+                    </div>
+
+                    <div class='form-group'>
                         <label for='name'>First Name</label>
                         <input class="form-control" type='text' name='first' id='first' value='{{ $profile->first }}'>
                         <span class="help-block">Optional</span>
@@ -44,18 +50,9 @@
                         <input class="form-control" type='text' autocorrect="off" name='city' id='city' value='{{ $profile->city->city }}'>
                         <span class="help-block">Optional</span>
                     </div>
-
-                    <div class='form-group'>
-                        <label for='name'>Name</label>
-                        <input class="form-control" type='text' name='name' id='name' value='{{ $profile->user->name }}'>
-                        <span class="help-block">This is the name displayed to other users</span>
-                    </div>
-
-                    <div class='form-group'>
-                        <label for='name'>Image</label>
-                        <input class="form-control" type='text' name='image' id='image' value='{{ old('image') }}'>
-                        <span class="help-block">Up load a picture or avatar for your profile</span>
-                    </div>
+                            <h4>Image</h4>
+                            <input class="btn-primary" type='file' title='Add an image' name='image' id='image'>
+                            <span class="help-block">Up load a picture or avatar for your profile (jpg, png)</span>
 
                     <div class='form-group'>
                         <label for='email'>Email</label>
@@ -69,6 +66,7 @@
 
         <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="../js/bootstrap.file-input.js"></script>
         <script src="../js/citycountry.js" type="text/javascript"></script>
 
         <script>
@@ -98,6 +96,7 @@
             var district = geoplugin_city();
             $("#city").val(district);
 
+            $('#image').bootstrapFileInput();
 
         });
         </script>

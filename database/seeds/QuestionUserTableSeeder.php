@@ -24,7 +24,7 @@ class QuestionUserTableSeeder extends Seeder
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'question_id' => $question_id,
-            'user_id' => 3,
+            'user_id' => 2,
         ]);
 
         $question_id = \AnswerMe\Question::where('question', '=', 'which is the best tv show')->pluck('id')->first();

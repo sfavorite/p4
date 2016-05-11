@@ -45,28 +45,27 @@ such as a page specific stylesheets.
                 </div>
 
 
+
                 <div class="col-sm-7 hiddex-xs">
                     <div id="contactCard">
                         <div class="panel panel-default">
                             <div class="list-group">
-                                <h2>Musketeer Contact Information</h2>
+                                <h2>User Profile</h2>
                                 <div class="demo-card">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="img-responsive" id="userName">{{ $profile->first . ' ' . $profile->last  }}</h4>
+                                            <h4 class="img-responsive" id="userName">{{ $profiles[0]->first . ' ' . $profiles[0]->last  }}</h4>
                                         </div>
-                                        <img class="card-img-top profile" src="{{ $profile->image }}" id="largePicture" alt="Users Picture">
+                                        <img class="card-img-top profile" src="{{ $profiles[0]->image }}" id="largePicture" alt="Users Picture">
                                         <div class="card-block" id="users">
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><p class="list-group-item-heading">Email</p>
-                                                    <h4 id="email">{{ $profile->user->email }}</h4>
-                                                </li>
+
 
                                                 <li class="list-group-item"><p class="list-group-item-heading">City</p>
-                                                    <h4 id="city">{{ $profile->city->city }}</h4>
+                                                    <h4 id="city">{{ $profiles[0]->city->city }}</h4>
                                                 </li>
                                                 <li class="list-group-item"><p class="list-group-item-heading">Home Country</p>
-                                                    <h4 id="country">{{ $profile->country->country }}</h4>
+                                                    <h4 id="country">{{ $profiles[0]->country->country }}</h4>
                                                 </li>
                                             </ul>
                                         </div>

@@ -22,6 +22,12 @@
                 <form method='POST' action='/email-signup'>
                     {!! csrf_field() !!}
                     <div class='form-group'>
+                        <label for='name'>Name</label>
+                        <input class="form-control" type='text' name='name' id='name' value='{{ old('name') }}'>
+                        <span class="help-block">This is the name displayed to other users</span>
+                    </div>
+
+                    <div class='form-group'>
                         <label for='name'>First Name</label>
                         <input class="form-control" type='text' name='first' id='first' value='{{ old('first') }}'>
                         <span class="help-block">Optional</span>
@@ -47,15 +53,9 @@
                     </div>
 
                     <div class='form-group'>
-                        <label for='name'>Name</label>
-                        <input class="form-control" type='text' name='name' id='name' value='{{ old('name') }}'>
-                        <span class="help-block">This is the name displayed to other users</span>
-                    </div>
-
-                    <div class='form-group'>
                         <label for='name'>Image</label>
-                        <input class="form-control" type='text' name='image' id='image' value='{{ old('image') }}'>
-                        <span class="help-block">Up load a picture or avatar for your profile</span>
+                        <input class="form-control" type='file' name='image' id='image' value='{{ old('image') }}'>
+                        <span class="help-block">Up load a picture or avatar for your profile (png, jpg)</span>
                     </div>
 
                     <div class='form-group'>
@@ -76,6 +76,7 @@
             </div>
 
 
+        <script async src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="../js/citycountry.js" type="text/javascript"></script>
