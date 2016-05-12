@@ -90,7 +90,7 @@ such as a page specific stylesheets.
     @if($questions->first())
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 id="header" class="panel-title">Topic {{ $questions[0]->category->type }}</h3>
+                <h3 id="header" class="panel-title">Your posted questions</h3>
             </div>
             <div class="table-responsive">
                 <table id="quesitonTable" class="table table-hover">

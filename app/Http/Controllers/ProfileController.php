@@ -47,7 +47,7 @@ class ProfileController extends BaseController
         $country = \AnswerMe\Country::where('country', '=', $request->input('country'))->first();
         // Did the user give us a valide country?
         if ($country) {
-            $profile->country_id = $country_id;
+            $profile->country_id = $country->id;
         }
         // Did the user give us a valide city?
         if ($city) {

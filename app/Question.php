@@ -191,6 +191,7 @@ class Question extends Model
         return $questions;
     }
 
+    # Get the questions this user has asked
     public static function questionsUserHasAsked($user_id, $category_id) {
 
             $questions = \AnswerMe\Question::with(array('category' => function($query) {

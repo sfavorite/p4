@@ -16,18 +16,25 @@ class JsonController extends BaseController
 
 
     function getQuestion(Request $request) {
+
+        $this->validate($request, [
+            'id' => 'required|numeric',
+        ]);
+
         $question_id = $request->input('id');
 
-        $question = \AnswerMe\Question::with('possibility')->find($question_id);
+        if ($question_id) {
+            $question = \AnswerMe\Question::with('possibility')->find($question_id);
 
-        if (count($question)) {
-            return $question->toJson();
-        } else {
-            $response = ['id' => 'Record not found'];
-            return json_encode($response);
+            if (count($question)) {
+                return $question->toJson();
+            } else {
+                $response = ['id' => 'Record not found'];
+                return json_encode($response);
+            }
         }
     }
-
+    
     function postAnswer(Request $request) {
         // Validate the input
 
@@ -47,7 +54,8 @@ class JsonController extends BaseController
 
     }
 
-    function getQuestionCount(Request $request) {
+    function getQuestionCount() {
+
 
         $user = \Auth::user();
         $equality = '<>';
