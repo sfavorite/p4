@@ -7,8 +7,12 @@
             // How many textboxes have been added.
             var n = $('.text').length + 1;
 
-            // Add a new input
-            $('#possibility').append('<label></label><div><input class="form-control" type="text" name="possibility[]" placeholder="Enter a voting possibility..."><br><button class="delete btn btn-danger">Delete</button></div>');
+            // If the use has less than five possilities add one
+            if (n < 5) {
+
+                // Add a new input
+                $('#possibility').append('<label></label><div><input class="form-control" type="text" name="possibility[]" placeholder="Enter a voting possibility..."><br><button class="delete btn btn-danger">Delete</button></div>');
+            }
 
             // How many boxes do we have...5 should be the max.
             // If so disable the Add possibility button

@@ -84,6 +84,13 @@ class AuthController extends Controller
         ]);
         $city = \AnswerMe\City::where('city', '=', $data['city'])->first();
         $country = \AnswerMe\Country::where('country', '=', $data['country'])->first();
+        // Since the profile is optional...think Oauth...or a sneaky TA
+        if(!count($city)) {
+            $city = \AnswerMe\City::where('id', '=', 1)->first(); # Private
+        }
+        if(!count($country)) {
+            $country = \AnswerMe\Country::where('id', '=', 1)->first(); # Private
+        }
 
         $profile = \AnswerMe\Profile::create([
             'user_id' => $user->id,
