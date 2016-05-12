@@ -108,13 +108,11 @@
 
 
         <!-- This will be where our content is pulled in on a per page basis -->
-        <section>
             <div class="container">
             {{-- Main page content will be yielded here --}}
 
             @yield('content')
             </div>
-        </section>
 
 
 
