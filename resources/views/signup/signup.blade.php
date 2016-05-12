@@ -25,10 +25,10 @@
         <div class="row">
             <div class="col-md-3"></div>
                 <div class="col-md-6">
+                    <div class="button-spacer"></div>
 
                     <h3>Wait...what? You aren't a member yet?</h3></br>
-                        <div class="button-spacer"></div>
-                        Sign up now and join us!
+                    <h4>Sign up now and join us!</h4>
                     </h3>
                     <a href="/email-signup" class="btn btn-lg btn-block btn-social btn-primary"><i class="fa fa-envelope"></i>Sign up with Email</a>
                     <a href="/github/authorize" class="btn btn-lg btn-block btn-social btn-github active" title="This is your last signin method"><i class="fa fa-github"></i>Sign up with GitHub</a>
