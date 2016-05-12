@@ -111,8 +111,5 @@ class AuthController extends Controller
         return view('signup.signup');
     }
 
-    public function emailSignup() {
-
-    }
 
 }

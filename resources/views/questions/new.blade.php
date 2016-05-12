@@ -33,6 +33,39 @@ such as a page specific stylesheets.
         @endforeach
     </ul>
 
+    @if(Session::get('message') != null)
+        <script src="../js/sessionModal" type="text/javascript"></script>
+    @endif
+
+
+        <div id='sessionModal' class="modal fade in" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" id="voteForm">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="sessionModal">&times;</button>
+                        <h3 id="question" class="modal-title"></h3>
+                    </div>
+
+
+                        <div class="modal-body">
+                            <h2 class="text-center">{{ Session::get('message') }}</h2>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <div class="btn-group">
+                                    <button id="cancel" data-dismiss="modal" class="btn btn-info btn-block">Cancel</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+
+            </div>
+        </div>
+
     <form role="form" method="POST" action="/newquestion">
             {{ csrf_field() }}
             <div class="form-group">
@@ -75,72 +108,5 @@ Use it to add specific things that *this* View needs at the end of the body,
 such as a page specific JavaScript files.
 --}}
 @section('body')
-<script>
-
-
-        // Add additional possibilities
-        $('#add').click(function (event) {
-            event.preventDefault();
-            // How many textboxes have been added.
-            var n = $('.text').length + 1;
-
-            // Add a new input
-            $('#possibility').append('<label></label><div><input class="form-control" type="text" name="possibility[]" placeholder="Enter a voting possibility..."><br><button class="delete btn btn-danger">Delete</button></div>');
-
-            // How many boxes do we have...5 should be the max.
-            // If so disable the Add possibility button
-            if (n > 2) {
-                $('#add').attr('disabled', 'disabled');
-            };
-        });
-
-        $('body').on('click', '.delete', function(event) {
-            // Remove the selected input box
-            $(this).parent('div').remove();
-
-            // Make sure the Add possibility button is not disabled.
-            $('#add').removeAttr('disabled');
-            return false;
-        });
-
-
-    // Get the question the user clicked on
-    function getQuestion(clicked_id) {
-        try {
-            $.ajax({
-                type: 'GET',
-                data: {id: clicked_id},
-                url: window.location.protocol + "//" + window.location.host + '/question/',
-                cache: false,
-                dataType: 'json',
-
-                success: function(data) {
-                    // If the record wasn't found show the error.
-                    if (data['id'] === 'Record not found') {
-                        $('#question').text(data['id']);
-                    // No error so show the question and options.
-                    } else {
-                        // Remove any options already in the select and put the fisrt one back.
-                        var select = $('#options');
-                        select.empty().append('<option value="">Give your opinion...</option>');
-                        $('#question').text(data['question'])
-                        for (i = 0; i < data.possibility.length; ++i) {
-                            var these_options = '<option value="' + data.possibility[i].id + '">' + data.possibility[i].instance + '</option>';
-                            $(these_options).appendTo('#options');
-                        }
-                    }
-
-                },
-                error: function(data) {
-                    console.log(data);
-                }
-            });
-        } catch(e) {
-            console.log('Try ajax get failed');
-        }
-    }
-
-
-
-</script>
+<script src="../js/new.js"></script>
 @stop

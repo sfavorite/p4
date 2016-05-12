@@ -16,6 +16,7 @@ class QuestionController extends BaseController
 
     # List's only questions in a given category
     function postCatQuestions() {
+
         $questions = \AnswerMe\Question::questionsInACategory(3);
         $categories = \AnswerMe\Category::sortedCategories();
 
@@ -23,32 +24,45 @@ class QuestionController extends BaseController
                 ->with('categories', $categories);
     }
 
+    # Get method for posting new questions.
     function getNewQuestion() {
+        # We want the user to be able to choose the category for this quesiton.
         $categories = \AnswerMe\Category::get();
 
         return view('questions.new')->with('categories', $categories);
     }
 
+    # When a user submits a new question for voting
     function postNewQuestion(Request $request) {
+
         $this->validate($request, [
-            'question' => 'required|min:10|max:200',
-            'possibility.*' => 'required|min:1|max:100|alpha_num',
+            'question' => 'required|min:2|max:200',
+            'possibility.*' => 'required|min:1|max:100',
             'type' => 'required|numeric',
         ]);
-        /*
-        $this->validate($request, [
-            'question' => 'required|min:10|max:200|alpha_num',
-            'possibility.*' => 'required'|'max:5'|'unique'
-        ]);
-*/
-        $data = array('question' => $request->input('question'),
-                'possibility' => $request->input('possibility'),
-                'category_id' => $request->input('type'));
-        \AnswerMe\Question::newQuestion($data);
-        //return 'Question posted';
+        $cat = \AnswerMe\Category::find(1);
+
+        # Make sure some sneaky TA didn't send a 'bad' number
+        if ($cat) {
+            $data = array('question' => $request->input('question'),
+                    'possibility' => $request->input('possibility'),
+                    'category_id' => $request->input('type'));
+
+            \AnswerMe\Question::newQuestion($data);
+
+
+            \Session::flash('message', 'Your question has been posted.');
+
+        } else {
+            \Session::flash('message', 'Problem with the category');
+        }
+        $categories = \AnswerMe\Category::get();
+
+        return view('questions.new')->with('categories', $categories);
     }
 
 
+    # Get the questions this user has posted
     function getUsersQuestions() {
         $questions = \AnswerMe\Question::singleUsersQuestions(\Auth::id());
 
@@ -62,7 +76,6 @@ class QuestionController extends BaseController
 
         $category_id = \AnswerMe\Category::where('type', '=', $cat_type)->pluck('id')->first();
 
-        //$user_profile = \AnswerMe\Profile::userProfile();
         $questions = \AnswerMe\Question::categoryQuestion($user->id, $category_id);
 
         return view('questions.category')->with('questions', $questions);

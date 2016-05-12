@@ -233,9 +233,8 @@ class Question extends Model
             'category_id' => 'required|integer',
         );
 
-        dump($data);
         $validator = \Validator::make($data, $rules);
-        echo 'here';
+
         if ($validator->fails()) {
             echo '<br>fail';
             return redirect('/profile')

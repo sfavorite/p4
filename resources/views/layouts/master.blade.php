@@ -55,17 +55,10 @@
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 @if (Auth::guest())
-                    <li>
-                      <a href="{{ url('/about') }}"
-                        <i class="fa fa-question-circle"></i>
-                        About
-                      </a>
-                    </li>
-
                     <li >
                       <a href="{{ url('/signup') }}"
                         <i class="fa fa-bolt"></i>
-                        Sign-in
+                        Get Started
                       </a>
                     </li>
 

@@ -120,6 +120,7 @@ such as a page specific stylesheets.
             </div>
 
         </div>
+    </div>
 @stop
 
 

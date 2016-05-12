@@ -22,19 +22,42 @@ class ProfileController extends BaseController
         });
 
         $this->validate($request, [
+            'name' => 'required|unique:users,name,'. \Auth::id(),
             'first' => 'max:255',
             'last' => 'max:255',
             'city' => 'alpha_spaces',
             'country' => 'alpha_spaces',
+            'email'=>'required|email|unique:users,email,'. \Auth::id(),
         ]);
 
+        // Get the user and save any name & email changes.
         $user = \Auth::user();
-        dump($user);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
 
+        // Get the profile so we can update as needed
         $profile = \AnswerMe\Profile::userProfile($user->id);
-        dump($profile);
-        $profile->city_id = 3;
+
+        $profile->first = $request->input('first');
+        $profile->first = $request->input('last');
+
+        // Get the city and country ID
+        $city = \AnswerMe\City::where('city', '=', $request->input('city'))->first();
+        $country = \AnswerMe\Country::where('country', '=', $request->input('country'))->first();
+        // Did the user give us a valide country?
+        if ($country) {
+            $profile->country_id = $country_id;
+        }
+        // Did the user give us a valide city?
+        if ($city) {
+            $profile->city_id = $city->id;
+        }
         $profile->save();
+
+        return view('dashboard.profile')->with('profile', $profile);
+
+
 
     }
 

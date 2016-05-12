@@ -26,6 +26,8 @@ such as a page specific stylesheets.
 
     @if(Session::get('message') != null)
         <div class="flash_message">{{ Session::get('message') }}</div>
+    @endif
+
         <div id='deleteModal' class="modal fade in" role="dialog">
             <div class="modal-dialog">
 
@@ -57,7 +59,6 @@ such as a page specific stylesheets.
                 </div>
             </div>
         </div>
-    @endif
 
     @if($questions->first())
         <div class="panel panel-default">

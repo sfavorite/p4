@@ -55,7 +55,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/profile', 'ProfileController@postChangeProfile');
 
     Route::get('/questions/{category}', 'QuestionController@getQuestions');
-//    Route::get('/posts/{category}', 'QuestionController@getPosts');
 
     Route::get('newquestion', 'QuestionController@getNewQuestion');
     Route::post('newquestion', 'QuestionController@postNewQuestion');
