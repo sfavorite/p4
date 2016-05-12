@@ -35,3 +35,6 @@ Here is a link to a youtube video that gives a brief description of this project
 
 7. Validator Regex: The code to do the alpha_spaces validator extension comes from Elenako Levska
 [Validator](http://blog.elenakolevska.com/laravel-alpha-validator-that-allows-spaces/)
+
+8. Bootcards: A derivation of Bootstrap to give a 'card' like appearance to applications.
+[Bootcards](http://bootcards.org)
