@@ -71,31 +71,31 @@
                     </a>
                   </li>
                   <li class="{{ Route::currentRouteNamed('newquestion') ? 'active' : ''}}">
-                    <a href="/newquestion"
+                    <a href="/newquestion">
                       <i class="fa fa-building-o"></i>
                       New Question
                     </a>
                   </li>
                   <li class="{{ Route::currentRouteNamed('myquestons') ? 'active' : ''}}">
-                    <a href="/myquestions"
+                    <a href="/myquestions">
                       <i class="fa fa-folder-open"></i>
                       Your Posts
                     </a>
                   </li>
                   <li class="{{ Route::currentRouteNamed('usersprofiles') ? 'active' : ''}}">
-                    <a href="/usersprofiles"
+                    <a href="/usersprofiles">
                       <i class="fa fa-clipboard"></i>
                       Users
                     </a>
                 </li class="{{ Route::currentRouteNamed('profile') ? 'active' : ''}}">
                   <li>
-                    <a href="/profile"
+                    <a href="/profile">
                       <i class="fa fa-cog"></i>
                       Profile
                     </a>
                   </li>
                   <li class="{{ Route::currentRouteNamed('logout') ? 'active' : ''}}">
-                    <a href="/logout"
+                    <a href="/logout">
                       <i class="fa fa-sign-out"></i>
                       Logout
                     </a>
