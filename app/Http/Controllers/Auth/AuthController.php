@@ -83,16 +83,15 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
         $city = \AnswerMe\City::where('city', '=', $data['city'])->first();
-
-        $country = \AnswerMe\Country::where('country', '=', $data['country']);
+        $country = \AnswerMe\Country::where('country', '=', $data['country'])->first();
 
         $profile = \AnswerMe\Profile::create([
             'user_id' => $user->id,
             'image' => 'img/generic_profile.png',
             'first' => $data['first'],
             'last' => $data['last'],
-            'city_id' => 1, //$data['city'],
-            'country_id' => 2
+            'city_id' => $city->id,
+            'country_id' => $country->id,
         ]);
         return ($user);
     }

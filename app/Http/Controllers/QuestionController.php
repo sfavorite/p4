@@ -85,6 +85,7 @@ class QuestionController extends BaseController
         $users_questions = \AnswerMe\Question::singleUsersQuestions($user->id);
         // Get the opinions tied to this questions
         $opinionsToRemove = \AnswerMe\Opinion::questionOpinionsGiven($request->input('question_id'));
+
         // Delete those opinions
         foreach($opinionsToRemove as $opinion) {
             $opinion->delete();
