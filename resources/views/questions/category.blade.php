@@ -25,6 +25,7 @@ such as a page specific stylesheets.
 @section('content')
 
     @if($questions->first())
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 id="header" class="panel-title">Topic {{ $questions[0]->category->type }}</h3>

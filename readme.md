@@ -1,9 +1,9 @@
-# Project 3 (P3) LoremIpsum and Profile Generator
+# Project 4 (P4) AnswerMe
 
 ## Description
-This repository is my fourth project in the Harvard Extension School's class Dynamic Web Applications. This is a database driven application using the Laravel framework. This application is a voiting site where registered users and post questions with the possible answers. Other registered users can then vote on those questions.
+This repository is my fourth project in the Harvard Extension School's class Dynamic Web Applications. This is a database driven application using the Laravel framework. This application is a voting site where registered users and post questions with the possible answers. Other registered users can then vote on those questions.
 
-s
+
 ## Live URL
 
 [P4 AnswerMe](http://p4.scotfavorite.net)

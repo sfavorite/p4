@@ -13,10 +13,9 @@ such as a page specific stylesheets.
 @section('head')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<script src='/js/welcome.js'></script>
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 
 @stop
@@ -25,35 +24,34 @@ such as a page specific stylesheets.
 @section('content')
 
 
-
     @if(Session::has('message'))
-    <div id='sessionModal' class="modal fade in" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content" id="voteForm">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="sessionModal">&times;</button>
-                </div>
-
-
-                    <div class="modal-body">
-                        <h2 class="text-center">{{ Session::get('message') }}</h2>
-
+        <script src="../js/mineSession.js"></script>
+        <div id='sessionModal' class="modal fade in" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" id="delete">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="sessionModal">&times;</button>
                     </div>
 
-                    <div class="modal-footer">
-                        <div class="form-group">
-                            <div class="btn-group">
-                                <button id="cancel" data-dismiss="modal" class="btn btn-info btn-block">Cancel</button>
 
+                        <div class="modal-body">
+                            <h2 class="text-center">{{ Session::get('message') }}</h2>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="form-group">
+                                <div class="btn-group">
+                                    <button id="cancel" data-dismiss="modal" class="btn btn-info btn-block">Cancel</button>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                </div>
 
             </div>
-
         </div>
-    </div>
-
     @endif
 
 

@@ -51,10 +51,10 @@ class QuestionController extends BaseController
             \AnswerMe\Question::newQuestion($data);
 
 
-            \Session::flash('message', 'Your question has been posted.');
+            \Session::flash('post', 'Your question has been posted.');
 
         } else {
-            \Session::flash('message', 'Problem with the category');
+            \Session::flash('post', 'Problem with the category');
         }
         $categories = \AnswerMe\Category::get();
 
