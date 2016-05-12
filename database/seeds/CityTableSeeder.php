@@ -11,7 +11,7 @@ class CityTableSeeder extends Seeder
       */
      public function run()
      {
-         $json = file_get_contents(__DIR__ . '/country_cities_small.json');
+         $json = file_get_contents(__DIR__ . '/country_cities.json');
 
          $country = json_decode($json, true);
          $city_array = array();
