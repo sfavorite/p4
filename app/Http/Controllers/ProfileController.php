@@ -46,16 +46,17 @@ class ProfileController extends BaseController
         $city = \AnswerMe\City::where('city', '=', $request->input('city'))->first();
         $country = \AnswerMe\Country::where('country', '=', $request->input('country'))->first();
         // Did the user give us a valide country?
-        if ($country) {
+        if (count($country)) {
             $profile->country_id = $country->id;
         }
         // Did the user give us a valide city?
-        if ($city) {
+        if (count($city)) {
             $profile->city_id = $city->id;
         }
-        dump($city);
         $profile->save();
-        dump($profile);
+        // Update the profile with any changes
+        $profile = \AnswerMe\Profile::userProfile($user->id);
+
         return view('dashboard.profile')->with('profile', $profile);
 
 

@@ -73,7 +73,6 @@
             </div>
 
 
-        <script language="JavaScript" src="http://www.geoplugin.net/javascript.gp" type="text/javascript"></script>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="../js/citycountry.js" type="text/javascript"></script>
 
