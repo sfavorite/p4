@@ -53,8 +53,9 @@ class ProfileController extends BaseController
         if ($city) {
             $profile->city_id = $city->id;
         }
+        dump($city);
         $profile->save();
-
+        dump($profile);
         return view('dashboard.profile')->with('profile', $profile);
 
 
