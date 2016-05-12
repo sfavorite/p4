@@ -7,27 +7,30 @@
 
         <h1>Login</h1>
 
-        @if(count($errors) > 0)
-            <ul class='errors'>
-                @foreach ($errors->all() as $error)
-                    <li><span class='fa fa-exclamation-circle'></span> {{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
-
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
+                @if($errors)
+                    <div>
+                        <ul class="list-group">
+                            @foreach ($errors->all() as $error)
+                                <li class="list-group-item list-group-item-danger">{{ $error }}</li>
+
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form method='POST' action='/login'>
 
                     {!! csrf_field() !!}
 
-                    <div class='form-group'>
+                    <div class='form-group @if ($errors->has('email')) has-error @endif'>
                         <label for='email'>Email</label>
                         <input type='text' class="form-control" name='email' id='email' value='{{ old('email') }}'>
                     </div>
 
-                    <div class='form-group'>
+                    <div class='form-group @if ($errors->has('password')) has-error @endif'>
                         <label for='password'>Password</label>
                         <input type='password' class="form-control" name='password' id='password' value='{{ old('password') }}'>
                     </div>

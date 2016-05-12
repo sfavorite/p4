@@ -24,8 +24,4 @@ $(document).ready(function() {
     var district = geoplugin_city();
     $("#city").val(district);
 
-    // Set the image upload button to look like bootstrap
-    $('#image').bootstrapFileInput();
-
-
 });

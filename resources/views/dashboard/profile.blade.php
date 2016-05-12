@@ -51,11 +51,6 @@
                         <span class="help-block">Optional</span>
                     </div>
                     <div class='form-group'>
-                            <h4>Image</h4>
-                            <input class="btn-primary" type='file' size='1000' title='Add an image' name='image' id='image'>
-                            <span class="help-block">Up load a picture or avatar for your profile (jpg, png)</span>
-                    </div>
-                    <div class='form-group'>
                         <label for='email'>Email</label>
                         <input class="form-control" type='text' name='email' id='email' value='{{ $profile->user->email }}'>
                         <span class="help-block">Your email is private and used only to login.</span>

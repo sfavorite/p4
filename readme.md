@@ -24,16 +24,14 @@ Here is a link to a youtube video that gives a brief description of this project
 3. jQuery: jQuery is a requirement of Bootstrap and must be called from the website using Bootstrap. A call to the jQuery library hosted at googleapis can be found in the script section of my pages.
 [jQuery website](http://jquery.com)
 
-
-8. Laravel: The base framework for the application
+4. Laravel: The base framework for the application
 [Laravel](https://laravel.com)
 
+5. OAuth: This plugin is how the Github Social Authentication is performed.
+[OAuth]("adamwathan/eloquent-oauth-l5": "^0.4.2")
 
-"adamwathan/eloquent-oauth-l5": "^0.4.2"
+6. GEO Plugin: Automatically filling in the city/country on the registration blade is done wiht the GEO Plugin
+[GEO]("http://www.geoplugin.net/")
 
-
-bootstrap file input
-http://gregpike.net/demos/bootstrap-file-input/demo.html
-
-Validator extension
-http://blog.elenakolevska.com/laravel-alpha-validator-that-allows-spaces/
+7. Validator Regex: The code to do the alpha_spaces validator extension comes from Elenako Levska
+[Validator](http://blog.elenakolevska.com/laravel-alpha-validator-that-allows-spaces/)
