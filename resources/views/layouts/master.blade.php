@@ -56,7 +56,7 @@
             <ul class="nav navbar-nav">
                 @if (Auth::guest())
                     <li >
-                      <a href="{{ url('/signup') }}"
+                      <a href="{{ url('/signup') }}">
                         <i class="fa fa-bolt"></i>
                         Get Started
                       </a>
