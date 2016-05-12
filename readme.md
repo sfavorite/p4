@@ -11,7 +11,7 @@ This repository is my fourth project in the Harvard Extension School's class Dyn
 ## Video Demo
 Here is a link to a youtube video that gives a brief description of this project.
 
-[Video Demo](https://youtu.be/zJRZ0OAoMDA)
+[Video Demo](https://www.youtube.com/watch?v=lM8E9HVOS3Q)
 
 ## Outside Code
 
