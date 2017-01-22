@@ -14,4 +14,6 @@ class Country extends Model
         return $this->hasMany('AnswerMe\Profile');
 
     }
+
+    
 }

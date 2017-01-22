@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+    <link href="css/placeholder.css" rel="stylesheet">
 
     <p class="text-center">Already have an account? <a href='/signup'>Login here...</a></p>
 
@@ -57,7 +58,7 @@
 
                     <div class='form-group @if ($errors->has('email')) has-error @endif'>
                         <label for='email'>Email</label>
-                        <input class="form-control" type='text' name='email' id='email' value='{{ old('email') }}'>
+                        <input class="form-control" type='text' name='email' id='email' value='{{ old('email') }}' placeholder="John Doe">
                         <span class="help-block">Your email is private and used only to login.</span>
                     </div>
                     <div class='form-group @if ($errors->has('password')) has-error @endif'>
@@ -70,10 +71,17 @@
                     </div>
                     <button type='submit' class='btn btn-primary'>Register</button>
                 </div>
+                <div class="col-md-3">
+                    <div class="arrow_box">
+                        <h1 class="">css arrow please!</h1>
+                    </div>
+                </div>
+
             </div>
 
 
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="../css/left_arrow.css">
         <script src="../js/citycountry.js" type="text/javascript"></script>
 
         <script src="../js/register.js" type="text/javascript"></script>
